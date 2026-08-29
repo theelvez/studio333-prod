@@ -62,21 +62,38 @@ document.addEventListener('DOMContentLoaded', () => {
     fromSlides.push({
       title: nameEl ? nameEl.textContent.trim() : filename,
       src,
-      filename
+      filename,
+      source: img
     });
   });
 
   const works = (fromSlides.length ? fromSlides : FALLBACK.map(([title, src]) => ({
     title,
     src,
-    filename: src.split('/').pop()
+    filename: src.split('/').pop(),
+    source: null
   }))).filter((w) => w.src);
+
+  works.forEach((w) => {
+    const warm = new Image();
+    warm.src = w.src;
+  });
 
   const absoluteUrls = (work) => {
     const origin = window.location.origin;
     const src = work.src.replace(/^\/+/, '');
     const stem = work.filename.replace(/\.[^.]+$/, '');
     return origin + '/' + src + '\n' + origin + '/gallery.html#' + stem;
+  };
+
+  const failMessage = (res, bodyText, json) => {
+    const raw = (json && (json.message || json.error)) || bodyText || (res ? ('HTTP ' + res.status) : 'network error');
+    const lower = String(raw).toLowerCase() + ' ' + (res ? String(res.status) : '');
+    if ((res && res.status === 429) || /rate|limit|too many/.test(lower)) {
+      return 'FormSubmit is rate-limiting, wait a minute';
+    }
+    const text = String(raw).trim();
+    return text || 'Could not send. Please try again.';
   };
 
   const sync = () => {
@@ -103,32 +120,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const revealTile = (btn, img) => {
-    if (img.naturalWidth) btn.hidden = false;
-  };
-
   grid.innerHTML = '';
   works.forEach((work) => {
-    const probe = new Image();
-    probe.decoding = 'async';
-    probe.src = work.src;
-
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'picker-tile';
-    btn.hidden = true;
     btn.dataset.title = work.title;
     btn.dataset.file = work.filename;
     btn.setAttribute('aria-pressed', 'false');
     btn.setAttribute('aria-label', 'Select ' + work.title);
-    const img = document.createElement('img');
+    const img = work.source ? work.source.cloneNode(true) : document.createElement('img');
     img.className = 'picker-thumb';
     img.alt = work.title;
     img.width = 96;
     img.height = 96;
-    img.decoding = 'async';
     img.loading = 'eager';
-    img.setAttribute('fetchpriority', 'high');
+    img.decoding = 'sync';
+    img.removeAttribute('hidden');
+    img.removeAttribute('srcset');
+    img.src = work.source && work.source.currentSrc ? work.source.currentSrc : work.src;
     const mark = document.createElement('span');
     mark.className = 'picker-check';
     mark.setAttribute('aria-hidden', 'true');
@@ -143,10 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
       else selected.add(work.title);
       sync();
     });
-    img.addEventListener('load', () => revealTile(btn, img));
-    img.addEventListener('error', () => btn.remove());
-    img.src = work.src;
-    if (img.complete && img.naturalWidth) revealTile(btn, img);
     grid.appendChild(btn);
   });
   sync();
@@ -225,9 +231,14 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           body: JSON.stringify(payload)
         });
-        const json = await res.json().catch(() => ({}));
-        if (!res.ok || json.success === false || json.success === 'false') {
-          throw new Error('send failed');
+        const bodyText = await res.text();
+        let json = {};
+        try { json = JSON.parse(bodyText); } catch (err) {}
+        console.log('FormSubmit', res.status, bodyText);
+        const ok = res.ok && (json.success === true || json.success === 'true');
+        if (!ok) {
+          if (statusEl) statusEl.textContent = failMessage(res, bodyText, json);
+          return;
         }
         form.hidden = true;
         if (statusEl) {
@@ -235,9 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
           statusEl.textContent = 'Inquiry sent.';
         }
       } catch (err) {
+        console.log('FormSubmit', err);
         if (statusEl) {
           statusEl.hidden = false;
-          statusEl.textContent = 'Could not send. Please try again.';
+          statusEl.textContent = failMessage(null, err && err.message, {});
         }
       } finally {
         if (submit) submit.disabled = false;
