@@ -159,6 +159,10 @@ body.is-inquire {
   grid-auto-rows: auto;
 }
 
+.picker-tile[hidden] {
+  display: none !important;
+}
+
 .picker-tile {
   position: relative;
   padding: 0;
