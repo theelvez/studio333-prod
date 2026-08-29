@@ -28,11 +28,12 @@
         <section class="contact-section contact-picker">
           <div class="contact-intro">
             <p class="tagline">Contact</p>
-            <h1>Private inquiries</h1>
+            <h1>Which works?</h1>
             <hr style="border: none; border-top: 1px solid #e0dbd5; margin: 0 0 20px;" />
-            <p class="contact-subtext">Select one or more works, or send a general note or commission.</p>
+            <p class="contact-subtext">Original, print, or both. Or send a general note.</p>
             <div class="picker-grid" id="picker-grid"></div>
             <p class="picker-chosen" id="picker-chosen">No works selected — general inquiry</p>
+            <div class="edition-list" id="picker-edition-list" hidden></div>
             <!-- Preview routing uses Azure Function st333inqfn29. -->
             <form
               class="contact-form picker-form"
@@ -54,16 +55,18 @@
               </div>
               <div class="contact-field">
                 <label class="contact-label" for="picker-message">Message</label>
-                <textarea id="picker-message" name="message"></textarea>
+                <textarea id="picker-message" name="message" placeholder="Size, framing, or anything else."></textarea>
               </div>
               <input type="hidden" name="paintings" id="picker-paintings" />
               <input type="hidden" name="painting_urls" id="picker-urls" />
+              <input type="hidden" name="editions" id="picker-editions" />
+              <input type="hidden" name="source" id="picker-source" value="contact" />
               <input type="hidden" name="_subject" id="picker-subject" value="studio333 general inquiry" />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_next" value="https://st333inq648e1f75.z5.web.core.windows.net/gallery.html" />
               <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
               <p class="inquire-status" id="picker-status" hidden></p>
-              <button type="submit" class="contact-submit ghost-link">Send inquiry →</button>
+              <button type="submit" class="contact-submit ghost-link">Send</button>
             </form>
           </div>
         </section>
