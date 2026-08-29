@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const lockGiclee = () => {
     if (editionValueEl) editionValueEl.value = 'giclee';
-    if (submitBtn) submitBtn.textContent = 'Buy this print';
+    if (submitBtn) submitBtn.textContent = 'Contact artist';
     const subjectEl = document.getElementById('buy-subject');
     if (subjectEl && currentWork) {
       subjectEl.value = 'studio333 giclée — ' + currentWork.title;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'picker-tile';
-        btn.setAttribute('aria-label', 'Buy ' + work.title);
+        btn.setAttribute('aria-label', 'Contact artist about ' + work.title);
         const img = document.createElement('img');
         img.src = work.src;
         img.alt = work.title;
