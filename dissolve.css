@@ -1,0 +1,105 @@
+/* Dissolving mosaic */
+.page-home.option-dissolve .campaign { display: none; }
+
+.mosaic-stage {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 7.5rem 0 0;
+  overflow: hidden;
+}
+
+.mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 28vw;
+  gap: 1px;
+  background: var(--gold);
+  min-height: 100vh;
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  background: var(--ground);
+  margin: 0;
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.04);
+  transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+              clip-path 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  clip-path: inset(0 0 0 0);
+}
+
+.tile.is-dissolving img {
+  opacity: 0;
+  filter: blur(8px);
+  clip-path: inset(18% 22% 24% 16%);
+}
+
+.tile.is-fracture img {
+  opacity: 0.15;
+  clip-path: polygon(0 0, 42% 0, 38% 48%, 0 52%);
+}
+
+.mosaic-copy {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: clamp(3rem, 8vw, 5.5rem);
+  z-index: 3;
+  max-width: 28rem;
+  pointer-events: none;
+}
+.mosaic-copy .text-link,
+.mosaic-copy a { pointer-events: auto; }
+
+.mosaic-veil {
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  background: linear-gradient(to top, rgba(11,11,11,0.82), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+body.is-melting .tile img {
+  opacity: 0;
+  filter: blur(12px);
+  clip-path: inset(40% 40% 40% 40%);
+  transition-duration: 1.1s;
+}
+body.is-melting .mosaic-copy { opacity: 0; transition: opacity 0.8s; }
+
+@media (min-width: 800px) {
+  .mosaic {
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 16vw;
+  }
+  .tile--wide { grid-column: span 2; }
+  .tile--tall { grid-row: span 2; }
+}
+
+.page-collection.from-mosaic .look {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: lookSettle 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.page-collection.from-mosaic .look:nth-child(1) { animation-delay: 0.05s; }
+.page-collection.from-mosaic .look:nth-child(2) { animation-delay: 0.12s; }
+.page-collection.from-mosaic .look:nth-child(3) { animation-delay: 0.18s; }
+.page-collection.from-mosaic .look:nth-child(4) { animation-delay: 0.24s; }
+@keyframes lookSettle {
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile img, body.is-melting .tile img { transition: none !important; filter: none !important; clip-path: none !important; opacity: 1 !important; }
+  .page-collection.from-mosaic .look { animation: none; opacity: 1; transform: none; }
+}
