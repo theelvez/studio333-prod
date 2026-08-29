@@ -6,28 +6,27 @@
   <title>studio333 — Contact</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="skin-ivory page-contact">
   <a class="skip" href="#main">Skip to content</a>
   <header class="mast">
     <a class="wordmark" href="index.html">studio333</a>
-    <nav aria-label="Maison">
-        <a href="gallery.html">Collection</a>
-        <a href="featured.html">Featured</a>
-        <a href="contact.html" class="is-active">Contact</a>
-        <a href="qr.html">Share</a>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="gallery.html">Collection</a>
+      <a class="nav-link" href="featured.html">Featured</a>
+      <a class="nav-link is-current" href="contact.html" aria-current="page">Contact</a>
+      <a class="nav-link" href="qr.html">Share</a>
     </nav>
   </header>
 
   <main id="main">
     <section class="desk">
-      <div>
-        <p class="kicker">Clientele</p>
-        <h1>Private inquiries</h1>
-        <p class="lede">For acquisition inquiries, commissions, or general correspondence.</p>
-      </div>
+      <p class="label">Clientele</p>
+      <h1 class="title-lg">Private inquiries</h1>
+      <p class="body">For acquisition inquiries, commissions, or general correspondence.</p>
+
             <!--
               ============================================================
               CONTACT FORM — sends to Dana@studio333gallery.com
@@ -49,28 +48,29 @@
 
               ============================================================
             -->
-      <form class="contact-form" action="https://formspree.io/f/mbdbvnzg" method="POST">
-        <div class="contact-field">
-          <label class="contact-label" for="name">Name</label>
+      <form class="desk-form" action="https://formspree.io/f/mbdbvnzg" method="POST">
+        <div class="field">
+          <label class="label" for="name">Name</label>
           <input type="text" id="name" name="name" />
         </div>
-        <div class="contact-field">
-          <label class="contact-label" for="email">Email</label>
+        <div class="field">
+          <label class="label" for="email">Email</label>
           <input type="email" id="email" name="email" required />
         </div>
-        <div class="contact-field">
-          <label class="contact-label" for="message">Message</label>
+        <div class="field">
+          <label class="label" for="message">Message</label>
           <textarea id="message" name="message"></textarea>
         </div>
         <input type="hidden" name="_subject" value="New studio333 inquiry" />
         <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
-        <button type="submit" class="contact-submit link-line">Send inquiry</button>
+        <button type="submit" class="desk-submit text-link">Send inquiry</button>
       </form>
     </section>
   </main>
-  <footer class="colophon">
-    <span>© 2026 studio333. All rights reserved.</span>
-  </footer>
 
+  <footer class="colophon">
+    <span class="copyright">© 2026 studio333. All rights reserved.</span>
+    <a class="nav-link" href="qr.html">Share</a>
+  </footer>
 </body>
 </html>
