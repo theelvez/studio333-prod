@@ -32,6 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (totalLabel) totalLabel.textContent = slides.length;
   };
 
+  const absoluteUrls = (work) => {
+    const origin = window.location.origin;
+    const src = work.src.replace(/^\/+/, '');
+    const stem = work.filename.replace(/\.[^.]+$/, '');
+    return origin + '/' + src + '\n' + origin + '/gallery.html#' + stem;
+  };
+
   const fillForm = (work) => {
     document.getElementById('inquire-img').src = work.src;
     document.getElementById('inquire-img').alt = work.title + ' artwork';
@@ -42,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('inquire-index').value = String(work.index + 1);
     document.getElementById('inquire-subject').value =
       'studio333 inquiry — ' + work.title + ' (' + work.filename + ')';
+    const urlsEl = document.getElementById('inquire-urls');
+    if (urlsEl) urlsEl.value = absoluteUrls(work);
   };
 
   const openInquire = (slide) => {
@@ -124,4 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   carousel.setAttribute('tabindex', '0');
+
+  const applyHash = () => {
+    const h = (location.hash || '').replace('#', '');
+    if (!h) return;
+    const i = slides.findIndex((s) => {
+      const file = s.querySelector('img').getAttribute('src').split('/').pop();
+      const stem = file.replace(/\.[^.]+$/, '');
+      return h === file || h === stem;
+    });
+    if (i >= 0) setActive(i);
+  };
+  applyHash();
+  window.addEventListener('hashchange', applyHash);
 });
