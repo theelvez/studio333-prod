@@ -5,8 +5,11 @@
 }
 
 .slide .inquire-open {
-  display: inline-block;
-  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 6px;
+  padding: 0 8px;
   font-size: 0.72rem;
 }
 
@@ -316,9 +319,12 @@ body.is-picker {
 
 .edition-list {
   margin: 0 0 12px;
-  flex: 0 0 auto;
-  max-height: 28vh;
-  overflow: auto;
+}
+
+.picker-form .edition-list {
+  flex: none;
+  max-height: none;
+  overflow: visible;
 }
 
 .edition-item {
