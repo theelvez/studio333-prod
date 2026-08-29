@@ -6,75 +6,71 @@
   <title>studio333 — Contact</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="skin-ivory page-contact">
+<body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="mast">
     <a class="wordmark" href="index.html">studio333</a>
-    <nav class="nav" aria-label="Primary">
-      <a class="nav-link" href="gallery.html">Collection</a>
-      <a class="nav-link" href="featured.html">Featured</a>
-      <a class="nav-link is-current" href="contact.html" aria-current="page">Contact</a>
-      <a class="nav-link" href="qr.html">Share</a>
+    <nav aria-label="Maison">
+        <a href="gallery.html">Collection</a>
+        <a href="featured.html">Featured</a>
+        <a href="contact.html" class="is-active">Contact</a>
+        <a href="qr.html">Share</a>
     </nav>
   </header>
 
   <main id="main">
     <section class="desk">
-      <p class="label">Contact</p>
-      <h1 class="title-lg">Private inquiries</h1>
-      <p class="body">For acquisition inquiries, commissions, or general correspondence.</p>
+      <div>
+        <p class="kicker">Clientele</p>
+        <h1>Private inquiries</h1>
+        <p class="lede">For acquisition inquiries, commissions, or general correspondence.</p>
+      </div>
+            <!--
+              ============================================================
+              CONTACT FORM — sends to Dana@studio333gallery.com
+              ============================================================
+              This form uses Formspree (https://formspree.io) to deliver
+              submissions by email. No server code is required, which is
+              why it keeps working no matter where the site is hosted.
 
-      <!--
-        ============================================================
-        CONTACT FORM — sends to Dana@studio333gallery.com
-        ============================================================
-        This form uses Formspree (https://formspree.io) to deliver
-        submissions by email. No server code is required, which is
-        why it keeps working no matter where the site is hosted.
+              ONE-TIME SETUP (must be done once, by anyone):
+                1. Go to https://formspree.io and create a free account
+                   using Dana@studio333gallery.com.
+                2. Create a new form (name it e.g. "studio333 inquiries").
+                3. Formspree gives you a form endpoint that looks like:
+                     https://formspree.io/f/abcdwxyz
+                4. If the Formspree endpoint changes, update the form
+                   `action` URL below (the part after /f/).
+                5. Submit the form once and confirm the verification email
+                   Formspree sends to the configured inbox. Done.
 
-        ONE-TIME SETUP (must be done once, by anyone):
-          1. Go to https://formspree.io and create a free account
-             using Dana@studio333gallery.com.
-          2. Create a new form (name it e.g. "studio333 inquiries").
-          3. Formspree gives you a form endpoint that looks like:
-               https://formspree.io/f/abcdwxyz
-          4. If the Formspree endpoint changes, update the form
-             `action` URL below (the part after /f/).
-          5. Submit the form once and confirm the verification email
-             Formspree sends to the configured inbox. Done.
-
-        ============================================================
-      -->
-      <form class="desk-form" action="https://formspree.io/f/mbdbvnzg" method="POST">
-        <div class="field">
-          <label class="label" for="name">Name</label>
-          <input type="text" id="name" name="name" autocomplete="name" />
+              ============================================================
+            -->
+      <form class="contact-form" action="https://formspree.io/f/mbdbvnzg" method="POST">
+        <div class="contact-field">
+          <label class="contact-label" for="name">Name</label>
+          <input type="text" id="name" name="name" />
         </div>
-        <div class="field">
-          <label class="label" for="email">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="email" />
+        <div class="contact-field">
+          <label class="contact-label" for="email">Email</label>
+          <input type="email" id="email" name="email" required />
         </div>
-        <div class="field">
-          <label class="label" for="message">Message</label>
-          <textarea id="message" name="message" rows="6"></textarea>
+        <div class="contact-field">
+          <label class="contact-label" for="message">Message</label>
+          <textarea id="message" name="message"></textarea>
         </div>
-
-        <!-- Sets the email subject line Dana sees -->
         <input type="hidden" name="_subject" value="New studio333 inquiry" />
-        <!-- Simple spam honeypot: bots fill this, humans never see it -->
-        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
-        <button type="submit" class="text-link desk-submit">Send inquiry</button>
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
+        <button type="submit" class="contact-submit link-line">Send inquiry</button>
       </form>
     </section>
   </main>
-
   <footer class="colophon">
-    <span class="copyright">© 2026 studio333. All rights reserved.</span>
-    <a class="nav-link" href="qr.html">Share</a>
+    <span>© 2026 studio333. All rights reserved.</span>
   </footer>
+
 </body>
 </html>
