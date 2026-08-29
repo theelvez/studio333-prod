@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeInquire();
   });
 
-  const AJAX = 'https://formsubmit.co/ajax/rrandjm43v3r@gmail.com';
+  const AJAX = 'https://st333inqfn29.azurewebsites.net/api/inquire';
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const gotcha = form.querySelector('[name="_gotcha"]');
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const bodyText = await res.text();
       let json = {};
       try { json = JSON.parse(bodyText); } catch (parseErr) {}
-      console.log('FormSubmit', res.status, bodyText);
+      console.log('inquire', res.status, bodyText);
       const ok = res.ok && (json.success === true || json.success === 'true');
       if (!ok) {
         const raw = (json && (json.message || json.error)) || bodyText || ('HTTP ' + res.status);
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (statusEl) {
           statusEl.hidden = false;
           statusEl.textContent = ((res.status === 429) || /rate|limit|too many/.test(lower))
-            ? 'FormSubmit is rate-limiting, wait a minute'
+            ? 'Could not send. Please try again.'
             : (String(raw).trim() || 'Could not send. Please try again.');
         }
         return;
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         statusEl.textContent = 'Inquiry sent.';
       }
     } catch (err) {
-      console.log('FormSubmit', err);
+      console.log('inquire', err);
       if (statusEl) {
         statusEl.hidden = false;
         statusEl.textContent = (err && err.message) || 'Could not send. Please try again.';
