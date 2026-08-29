@@ -33,7 +33,6 @@
             <p class="contact-subtext">Original, print, or both. Or send a general note.</p>
             <div class="picker-grid" id="picker-grid"></div>
             <p class="picker-chosen" id="picker-chosen">No works selected — general inquiry</p>
-            <div class="edition-list" id="picker-edition-list" hidden></div>
             <!-- Preview routing uses Azure Function st333inqfn29. -->
             <form
               class="contact-form picker-form"
@@ -41,6 +40,7 @@
               action="https://st333inqfn29.azurewebsites.net/api/inquire"
               method="POST"
             >
+              <div class="edition-list" id="picker-edition-list" hidden></div>
               <div class="contact-field">
                 <label class="contact-label" for="picker-name">Name</label>
                 <input type="text" id="picker-name" name="name" required />
