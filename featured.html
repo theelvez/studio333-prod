@@ -6,39 +6,37 @@
   <title>studio333 — Featured</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="page">
-    <header class="site-header">
-      <a href="gallery.html" class="brand">studio333</a>
-      <nav>
-        <a href="gallery.html">Gallery</a>
-        <a href="featured.html" class="active">Featured</a>
-        <a href="contact.html">Contact</a>
-        <a href="qr.html">Share</a>
-      </nav>
-    </header>
+<body class="skin-dark page-featured">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast">
+    <a class="wordmark" href="index.html">studio333</a>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="gallery.html">Collection</a>
+      <a class="nav-link is-current" href="featured.html" aria-current="page">Featured</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="nav-link" href="qr.html">Share</a>
+    </nav>
+  </header>
 
-    <main>
-      <section class="exhibition-entry">
-        <div class="exhibition-meta">
-          <p class="tagline">Featured in</p>
-          <h2 class="exhibition-title">Bis on Main — Bellevue</h2>
-          <p class="exhibition-body">A selection of works lives within the dining space, where art becomes part of the atmosphere.</p>
-          <a class="ghost-link exhibition-visit" href="https://bobbymoorerestaurants.com/" target="_blank" rel="noopener" style="margin-top: 24px; display: inline-block;">Visit Bis on Main →</a>
-        </div>
-        <div class="exhibition-image-block">
-          <img src="assets/bis/Bis_1.jpg" alt="Studio333 works at Bis on Main, Bellevue" class="exhibition-img" />
-        </div>
-      </section>
-    </main>
+  <main id="main">
+    <section class="campaign campaign--featured" aria-label="Bis on Main">
+      <img class="campaign-image" src="assets/bis/Bis_1.jpg" alt="Studio333 works at Bis on Main, Bellevue" />
+      <div class="campaign-veil" aria-hidden="true"></div>
+      <div class="campaign-copy">
+        <p class="label">Featured in</p>
+        <h1 class="title-lg">Bis on Main — Bellevue</h1>
+        <p class="lede">A selection of works lives within the dining space, where art becomes part of the atmosphere.</p>
+        <a class="text-link" href="https://bobbymoorerestaurants.com/" target="_blank" rel="noopener">Bis on Main</a>
+      </div>
+    </section>
+  </main>
 
-    <footer class="footer-nav">
-      <hr style="border: none; border-top: 1px solid #c8c2ba; margin: 0 0 24px; width: 100%;" />
-      <span class="copyright">© 2026 studio333. All rights reserved.</span>
-    </footer>
-  </div>
+  <footer class="colophon">
+    <span class="copyright">© 2026 studio333. All rights reserved.</span>
+    <a class="nav-link" href="qr.html">Share</a>
+  </footer>
 </body>
 </html>
