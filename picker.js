@@ -129,16 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.dataset.file = work.filename;
     btn.setAttribute('aria-pressed', 'false');
     btn.setAttribute('aria-label', 'Select ' + work.title);
-    const img = work.source ? work.source.cloneNode(true) : document.createElement('img');
-    img.className = 'picker-thumb';
+    const img = document.createElement('img');
+    img.src = work.src;
     img.alt = work.title;
-    img.width = 96;
-    img.height = 96;
-    img.loading = 'eager';
-    img.decoding = 'sync';
-    img.removeAttribute('hidden');
-    img.removeAttribute('srcset');
-    img.src = work.source && work.source.currentSrc ? work.source.currentSrc : work.src;
     const mark = document.createElement('span');
     mark.className = 'picker-check';
     mark.setAttribute('aria-hidden', 'true');
