@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.picker-form');
   const chosenEl = document.getElementById('picker-chosen');
   const paintingsEl = document.getElementById('picker-paintings');
+  const urlsEl = document.getElementById('picker-urls');
   const subjectEl = document.getElementById('picker-subject');
   const selected = new Set();
 
@@ -63,9 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const titles = () => works.filter((w) => selected.has(w.title)).map((w) => w.title);
 
+  const absoluteUrls = (work) => {
+    const origin = window.location.origin;
+    const src = work.src.replace(/^\/+/, '');
+    const stem = work.filename.replace(/\.[^.]+$/, '');
+    return origin + '/' + src + '\n' + origin + '/gallery.html#' + stem;
+  };
+
   const sync = () => {
-    const list = titles();
+    const chosen = works.filter((w) => selected.has(w.title));
+    const list = chosen.map((w) => w.title);
     if (paintingsEl) paintingsEl.value = list.join(', ');
+    if (urlsEl) urlsEl.value = chosen.map(absoluteUrls).join('\n');
     if (subjectEl) {
       subjectEl.value = list.length
         ? 'studio333 general inquiry — ' + list.join(', ')
