@@ -1,0 +1,79 @@
+.page-film { background: #000; color: #f3efe6; }
+.page-film .mast {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.4s ease;
+  z-index: 5;
+}
+.page-film.is-settled .mast { opacity: 1; pointer-events: auto; }
+.film {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 1.8s ease;
+}
+.frame.is-on { opacity: 1; z-index: 1; }
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+}
+.frame.is-on img { animation: ken 14s linear forwards; }
+.frame.is-on:nth-child(even) img { animation-name: ken-alt; }
+@keyframes ken {
+  from { transform: scale(1.08) translate3d(0,0,0); }
+  to { transform: scale(1.18) translate3d(-2%,-1%,0); }
+}
+@keyframes ken-alt {
+  from { transform: scale(1.12) translate3d(0,0,0); }
+  to { transform: scale(1.2) translate3d(2%,1%,0); }
+}
+.film-grade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.12) 40%, rgba(0,0,0,0.2) 100%);
+}
+.film-caption {
+  position: absolute;
+  left: clamp(1.25rem, 6vw, 4rem);
+  bottom: 1.6rem;
+  z-index: 3;
+  margin: 0;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(243,239,230,0.72);
+}
+.film-caption span { color: #c4b48a; margin-right: 0.8rem; }
+.film-end {
+  position: absolute;
+  left: clamp(1.25rem, 6vw, 4rem);
+  right: clamp(1.25rem, 6vw, 4rem);
+  bottom: 18vh;
+  z-index: 4;
+  max-width: 28rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1.6s ease, transform 1.6s ease;
+  pointer-events: none;
+}
+.page-film.is-settled .film-end { opacity: 1; transform: none; pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .frame img { animation: none; transform: none; }
+  .frame { transition: none; }
+  .page-film .mast, .film-end { opacity: 1; transform: none; pointer-events: auto; }
+}
