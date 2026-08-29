@@ -5,28 +5,68 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalLabel = document.getElementById('carousel-total');
   const prevBtn = document.querySelector('.carousel-control.prev');
   const nextBtn = document.querySelector('.carousel-control.next');
+  const carousel = document.querySelector('.carousel');
+  const slidesContainer = document.querySelector('.slides');
+  const overlay = document.getElementById('inquire');
+  const form = overlay && overlay.querySelector('.inquire-form');
+  const statusEl = document.getElementById('inquire-status');
   let index = 0;
+
+  const workFromSlide = (slide) => {
+    const img = slide.querySelector('img');
+    const src = img.getAttribute('src');
+    return {
+      title: slide.querySelector('.piece-name').textContent.trim(),
+      medium: slide.querySelector('.piece-meta').textContent.trim(),
+      src,
+      filename: src.split('/').pop(),
+      index: Number(slide.dataset.index)
+    };
+  };
 
   const setActive = (newIndex) => {
     index = (newIndex + slides.length) % slides.length;
     slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-    // Progress bar
-    if (progress) {
-      progress.style.width = ((index + 1) / slides.length * 100) + '%';
+    if (progress) progress.style.width = ((index + 1) / slides.length * 100) + '%';
+    if (currentLabel) currentLabel.textContent = (index + 1);
+    if (totalLabel) totalLabel.textContent = slides.length;
+  };
+
+  const fillForm = (work) => {
+    document.getElementById('inquire-img').src = work.src;
+    document.getElementById('inquire-img').alt = work.title + ' artwork';
+    document.getElementById('inquire-title').textContent = work.title;
+    document.getElementById('inquire-medium').textContent = work.medium;
+    document.getElementById('inquire-painting').value = work.title;
+    document.getElementById('inquire-image').value = work.filename;
+    document.getElementById('inquire-index').value = String(work.index + 1);
+    document.getElementById('inquire-subject').value =
+      'studio333 inquiry — ' + work.title + ' (' + work.filename + ')';
+  };
+
+  const openInquire = (slide) => {
+    if (!overlay) return;
+    fillForm(workFromSlide(slide));
+    if (statusEl) {
+      statusEl.hidden = true;
+      statusEl.textContent = '';
     }
-    // Fraction label
-    if (currentLabel) {
-      currentLabel.textContent = (index + 1);
-    }
-    if (totalLabel) {
-      totalLabel.textContent = slides.length;
-    }
+    if (form) form.hidden = false;
+    overlay.hidden = false;
+    document.body.classList.add('is-inquire');
+    overlay.querySelector('.inquire-close').focus();
+  };
+
+  const closeInquire = () => {
+    if (!overlay || overlay.hidden) return;
+    overlay.hidden = true;
+    document.body.classList.remove('is-inquire');
   };
 
   prevBtn.addEventListener('click', () => setActive(index - 1));
   nextBtn.addEventListener('click', () => setActive(index + 1));
-  // Keyboard navigation
-  document.querySelector('.carousel').addEventListener('keydown', (e) => {
+
+  carousel.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       setActive(index - 1);
       e.preventDefault();
@@ -36,25 +76,72 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // swipe support
-  const slidesContainer = document.querySelector('.slides');
   let startX = null;
-  slidesContainer.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
+  let startY = null;
+  slidesContainer.addEventListener('pointerdown', (e) => {
+    startX = e.clientX;
+    startY = e.clientY;
   });
-  slidesContainer.addEventListener('touchend', (e) => {
+  slidesContainer.addEventListener('pointerup', (e) => {
     if (startX === null) return;
-    const delta = e.changedTouches[0].clientX - startX;
-    if (Math.abs(delta) > 40) {
-      if (delta > 0) {
-        setActive(index - 1);
-      } else {
-        setActive(index + 1);
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    startX = null;
+    startY = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      setActive(index + (dx > 0 ? -1 : 1));
+      return;
+    }
+    if (Math.abs(dx) < 12 && Math.abs(dy) < 12) {
+      const t = e.target;
+      if (t.closest('.inquire-open') || t.closest('.slide.active img') || t.closest('.slide.active')) {
+        if (t.closest('a.inquire-open')) return;
+        openInquire(slides[index]);
       }
     }
-    startX = null;
   });
 
-  // Make carousel focusable for keyboard navigation
-  document.querySelector('.carousel').setAttribute('tabindex', '0');
+  document.querySelectorAll('.inquire-open').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const slide = link.closest('.slide');
+      openInquire(slide || slides[index]);
+    });
+  });
+
+  overlay.querySelector('.inquire-close').addEventListener('click', closeInquire);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeInquire();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeInquire();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const gotcha = form.querySelector('[name="_gotcha"]');
+    if (gotcha && gotcha.value) return;
+    const data = new FormData(form);
+    const submit = form.querySelector('[type="submit"]');
+    submit.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' }
+      });
+      if (!res.ok) throw new Error('send failed');
+      form.hidden = true;
+      statusEl.hidden = false;
+      statusEl.textContent = 'Inquiry sent.';
+    } catch (err) {
+      statusEl.hidden = false;
+      statusEl.textContent = 'Could not send. Please try again.';
+    } finally {
+      submit.disabled = false;
+    }
+  });
+
+  carousel.setAttribute('tabindex', '0');
 });
