@@ -8,9 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const paintingsEl = document.getElementById('picker-paintings');
   const urlsEl = document.getElementById('picker-urls');
   const subjectEl = document.getElementById('picker-subject');
+  const editionsEl = document.getElementById('picker-editions');
+  const listEl = document.getElementById('picker-edition-list');
   const statusEl = document.getElementById('picker-status');
   const AJAX = 'https://st333inqfn29.azurewebsites.net/api/inquire';
   const selected = new Set();
+  const editions = new Map();
 
   const FALLBACK = [
     ['Winter Light', 'assets/art-01.jpg'],
@@ -86,6 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return origin + '/' + src + '\n' + origin + '/gallery.html#' + stem;
   };
 
+  const encodeSet = (set) => {
+    const out = [];
+    if (set.has('original')) out.push('original');
+    if (set.has('giclee')) out.push('giclee');
+    return out.join(',');
+  };
+
   const failMessage = (res, bodyText, json) => {
     const raw = (json && (json.message || json.error)) || bodyText || (res ? ('HTTP ' + res.status) : 'network error');
     const lower = String(raw).toLowerCase() + ' ' + (res ? String(res.status) : '');
@@ -96,14 +106,68 @@ document.addEventListener('DOMContentLoaded', () => {
     return text || 'Could not send. Please try again.';
   };
 
+  const renderEditionList = () => {
+    if (!listEl) return;
+    const chosen = works.filter((w) => selected.has(w.title));
+    listEl.innerHTML = '';
+    if (!chosen.length) {
+      listEl.hidden = true;
+      return;
+    }
+    listEl.hidden = false;
+    chosen.forEach((work) => {
+      const item = document.createElement('div');
+      item.className = 'edition-item';
+      const title = document.createElement('p');
+      title.className = 'edition-item-title';
+      title.textContent = work.title;
+      const row = document.createElement('div');
+      row.className = 'edition-row';
+      row.setAttribute('role', 'group');
+      row.setAttribute('aria-label', "I'm asking about " + work.title);
+      ['original', 'giclee'].forEach((key) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'edition-chip';
+        chip.dataset.edition = key;
+        chip.textContent = key === 'original' ? 'Original' : 'Giclée print';
+        const on = editions.has(work.title) && editions.get(work.title).has(key);
+        chip.classList.toggle('is-on', on);
+        chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+        chip.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!editions.has(work.title)) editions.set(work.title, new Set());
+          const set = editions.get(work.title);
+          if (set.has(key)) set.delete(key);
+          else set.add(key);
+          sync();
+        });
+        row.appendChild(chip);
+      });
+      item.appendChild(title);
+      item.appendChild(row);
+      listEl.appendChild(item);
+    });
+  };
+
   const sync = () => {
     const chosen = works.filter((w) => selected.has(w.title));
     const list = chosen.map((w) => w.title);
+    Array.from(editions.keys()).forEach((title) => {
+      if (!selected.has(title)) editions.delete(title);
+    });
     if (paintingsEl) paintingsEl.value = list.join(', ');
     if (urlsEl) urlsEl.value = chosen.map(absoluteUrls).join('\n');
+    if (editionsEl) {
+      editionsEl.value = chosen.map((w) => {
+        const set = editions.get(w.title) || new Set();
+        return w.title + ': ' + encodeSet(set);
+      }).join('\n');
+    }
     if (subjectEl) {
       subjectEl.value = list.length
-        ? 'studio333 general inquiry — ' + list.join(', ')
+        ? 'studio333 inquiry — ' + list.join(', ')
         : 'studio333 general inquiry';
     }
     if (chosenEl) {
@@ -118,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const mark = btn.querySelector('.picker-check');
       if (mark) mark.hidden = !on;
     });
+    renderEditionList();
   };
 
   grid.innerHTML = '';
@@ -142,8 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      if (selected.has(work.title)) selected.delete(work.title);
-      else selected.add(work.title);
+      if (selected.has(work.title)) {
+        selected.delete(work.title);
+        editions.delete(work.title);
+      } else {
+        selected.add(work.title);
+      }
       sync();
     });
     grid.appendChild(btn);
@@ -197,11 +266,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (location.hash === '#picker') openPicker();
+  window.addEventListener('hashchange', () => {
+    if (location.hash === '#picker') openPicker();
+  });
+
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const gotcha = form.querySelector('[name="_gotcha"]');
       if (gotcha && gotcha.value) return;
+      const chosen = works.filter((w) => selected.has(w.title));
+      const missing = chosen.some((w) => !encodeSet(editions.get(w.title) || new Set()));
+      if (missing) {
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.textContent = 'Choose original or print.';
+        }
+        return;
+      }
       sync();
       const payload = {};
       new FormData(form).forEach((value, key) => {
@@ -236,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.hidden = true;
         if (statusEl) {
           statusEl.hidden = false;
-          statusEl.textContent = 'Inquiry sent.';
+          statusEl.textContent = "Sent. I'll reply by email.";
         }
       } catch (err) {
         console.log('inquire', err);
