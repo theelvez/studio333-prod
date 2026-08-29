@@ -127,9 +127,49 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeInquire();
   });
 
-  form.addEventListener('submit', (e) => {
+  const AJAX = 'https://formsubmit.co/ajax/rrandjm43v3r@gmail.com';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
     const gotcha = form.querySelector('[name="_gotcha"]');
-    if (gotcha && gotcha.value) e.preventDefault();
+    if (gotcha && gotcha.value) return;
+    const payload = {};
+    new FormData(form).forEach((value, key) => {
+      if (key === '_gotcha' || key === '_next') return;
+      payload[key] = value;
+    });
+    payload._captcha = 'false';
+    const submit = form.querySelector('[type="submit"]');
+    if (submit) submit.disabled = true;
+    if (statusEl) {
+      statusEl.hidden = false;
+      statusEl.textContent = 'Sending…';
+    }
+    try {
+      const res = await fetch(AJAX, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.success === false || json.success === 'false') {
+        throw new Error('send failed');
+      }
+      form.hidden = true;
+      if (statusEl) {
+        statusEl.hidden = false;
+        statusEl.textContent = 'Inquiry sent.';
+      }
+    } catch (err) {
+      if (statusEl) {
+        statusEl.hidden = false;
+        statusEl.textContent = 'Could not send. Please try again.';
+      }
+    } finally {
+      if (submit) submit.disabled = false;
+    }
   });
 
   carousel.setAttribute('tabindex', '0');
