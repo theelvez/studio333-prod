@@ -8,8 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="dissolve.css" />
 </head>
-<body class="skin-dark page-home">
+<body class="skin-dark page-home option-dissolve">
   <a class="skip" href="#main">Skip to content</a>
   <header class="mast">
     <a class="wordmark" href="index.html">studio333</a>
@@ -22,13 +23,36 @@
   </header>
 
   <main id="main">
-    <section class="campaign" aria-label="Opening">
-      <img class="campaign-image" src="assets/art-01.jpg" alt="Winter Light" />
-      <div class="campaign-veil" aria-hidden="true"></div>
-      <div class="campaign-copy">
+    <section class="mosaic-stage" aria-label="Collection mosaic">
+      <div class="mosaic" id="mosaic">
+        <figure class="tile tile--wide" data-title="Winter Light"><img src="assets/art-01.jpg" alt="Winter Light" /></figure>
+        <figure class="tile tile--tall" data-title="Aerial Frost"><img src="assets/art-02.jpg" alt="Aerial Frost" /></figure>
+        <figure class="tile" data-title="Veiled Branches"><img src="assets/art-03.jpg" alt="Veiled Branches" /></figure>
+        <figure class="tile tile--wide" data-title="Celestial Drift"><img src="assets/art-04.jpg" alt="Celestial Drift" /></figure>
+        <figure class="tile" data-title="Radiant Mist"><img src="assets/art-05.jpg" alt="Radiant Mist" /></figure>
+        <figure class="tile" data-title="Silent Echoes"><img src="assets/art-06.jpg" alt="Silent Echoes" /></figure>
+        <figure class="tile" data-title="Golden Veil"><img src="assets/art-07.jpg" alt="Golden Veil" /></figure>
+        <figure class="tile tile--wide" data-title="Twilight Passage"><img src="assets/art-08.jpg" alt="Twilight Passage" /></figure>
+        <figure class="tile tile--tall" data-title="Frosted Horizon"><img src="assets/art-09.jpg" alt="Frosted Horizon" /></figure>
+        <figure class="tile" data-title="Echoing Stillness"><img src="assets/art-10.jpg" alt="Echoing Stillness" /></figure>
+        <figure class="tile" data-title="Opaline Dusk"><img src="assets/art-11.jpg" alt="Opaline Dusk" /></figure>
+        <figure class="tile" data-title="Shifting Silence"><img src="assets/art-12.jpg" alt="Shifting Silence" /></figure>
+        <figure class="tile tile--wide" data-title="Gilded Whisper"><img src="assets/art-13.jpg" alt="Gilded Whisper" /></figure>
+        <figure class="tile" data-title="Luminous Veins"><img src="assets/art-14.jpg" alt="Luminous Veins" /></figure>
+        <figure class="tile tile--tall" data-title="Hushed Aurora"><img src="assets/art-15.jpg" alt="Hushed Aurora" /></figure>
+        <figure class="tile" data-title="Crystalline Path"><img src="assets/art-16.jpg" alt="Crystalline Path" /></figure>
+        <figure class="tile tile--wide" data-title="Solstice Veil"><img src="assets/art-17.jpg" alt="Solstice Veil" /></figure>
+        <figure class="tile" data-title="Frozen Reverie"><img src="assets/art-18.jpg" alt="Frozen Reverie" /></figure>
+        <figure class="tile" data-title="Silent Prism"><img src="assets/art-19.jpg" alt="Silent Prism" /></figure>
+        <figure class="tile" data-title="Opal Frost"><img src="assets/art-20.jpg" alt="Opal Frost" /></figure>
+        <figure class="tile" data-title="Aurora Drift"><img src="assets/art-21.jpg" alt="Aurora Drift" /></figure>
+        <figure class="tile tile--wide" data-title="Radiant Spiral"><img src="assets/art-22.jpg" alt="Radiant Spiral" /></figure>
+      </div>
+      <div class="mosaic-veil" aria-hidden="true"></div>
+      <div class="mosaic-copy">
         <h1 class="display">studio333</h1>
         <p class="lede">Silent constellations of frost and gold</p>
-        <a class="text-link" href="gallery.html">Enter Collection</a>
+        <a class="text-link" id="enter-collection" href="gallery.html">Enter Collection</a>
       </div>
     </section>
 
@@ -47,5 +71,6 @@
     <span class="copyright">© 2026 studio333. All rights reserved.</span>
     <a class="nav-link" href="qr.html">Share</a>
   </footer>
+  <script src="dissolve.js" defer></script>
 </body>
 </html>
