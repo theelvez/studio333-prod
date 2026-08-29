@@ -33,7 +33,7 @@
         </button>
 
         <div class="stage" id="stage">
-          <div class="frame" id="frame">
+          <div class="frame" id="frame" role="button" tabindex="0" aria-label="View Winter Light full screen">
             <figure class="canvas">
               <img id="plane-img" src="assets/art-01.jpg" alt="Winter Light" />
               <span class="canvas-grain" aria-hidden="true"></span>
@@ -71,6 +71,21 @@
     <span class="copyright">© 2026 studio333. All rights reserved.</span>
     <a class="nav-link" href="contact.html">Contact</a>
   </footer>
+
+  <div class="zoom" id="zoom" hidden>
+    <button class="zoom-close" type="button" aria-label="Close full screen">
+      <span class="plane-nav-mark">Close</span>
+    </button>
+    <div class="zoom-stage" id="zoom-stage">
+      <figure class="canvas zoom-canvas">
+        <img id="zoom-img" src="assets/art-01.jpg" alt="Winter Light" />
+        <span class="canvas-grain" aria-hidden="true"></span>
+        <span class="canvas-light" aria-hidden="true"></span>
+        <span class="canvas-rebate" aria-hidden="true"></span>
+      </figure>
+    </div>
+    <p class="zoom-cap label" id="zoom-cap">01  Winter Light</p>
+  </div>
   <script src="couture.js" defer></script>
 </body>
 </html>
