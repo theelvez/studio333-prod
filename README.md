@@ -1,49 +1,34 @@
-# studio333 — Production Website
+# studio333 — Maison redesign (proposal)
 
-Luxury art gallery website for **studio333** by Rasa. Live at [studio333gallery.com](https://studio333gallery.com).
+Proposed luxury maison redesign of the studio333 site, on this fork only.
 
 ## Pages
 
 | Page | File | Description |
 |------|------|-------------|
-| Gallery | `gallery.html` | Carousel of 21 original artworks |
-| Featured | `featured.html` | Bis on Main — Bellevue exhibition |
-| Contact | `contact.html` | Private acquisition inquiries |
-| Share | `qr.html` | QR code linking to gallery |
-| Redirect | `index.html` | Redirects root URL to gallery |
+| House | `index.html` | Maison homepage |
+| Collection | `gallery.html` | Lookbook of 22 works and immersive viewing room |
+| Featured | `featured.html` | Bis on Main — Bellevue |
+| Contact | `contact.html` | Private inquiries (Formspree) |
+| Share | `qr.html` | QR code linking to studio333gallery.com |
 
 ## Stack
 
-- Pure HTML5 / CSS3 / Vanilla JS — no frameworks, no build tools
-- Google Fonts: Cormorant Garamond (headings) + Inter (body)
-- Deployed on Render as a static site
+- Pure HTML5 / CSS3 / vanilla JS — no frameworks, no build tools
+- Google Fonts: Bodoni Moda (wordmark) + Inter Tight (UI)
+- Statically hostable
 
-## Assets
+## Preserved
 
-- `assets/art-01.jpg` — `art-21.jpg` — processed artwork images (900×1200px, sRGB, ≤350KB)
-- `assets/bis/Bis_1.jpg` — Bis on Main exhibition photo
-- `assets/QR/qr-code-new.png` — QR code linking to studio333gallery.com
+- All 22 artwork files `assets/art-01.jpg`–`art-22.jpg` and titles Winter Light through Radiant Spiral
+- Medium line: Acrylic, mixed media on canvas
+- Formspree `https://formspree.io/f/mbdbvnzg`, `_subject`, honeypot `_gotcha`
+- Bis on Main copy, photo `assets/bis/Bis_1.jpg`, and link
+- QR `assets/QR/qr-code-new.png` to studio333gallery.com
+- © 2026 studio333. All rights reserved.
 
-## Image Processing
-
-Artwork images are processed to 900×1200px portrait format with `#f5f5f3` warm neutral background. To reprocess:
-
-```bash
-npm install
-node process-images.js
-```
-
-Output goes to `assets-processed/`. Copy to `assets/` to deploy.
-
-## Local Preview
-
-Open any HTML file directly in a browser, or serve locally:
+## Local preview
 
 ```bash
 python3 -m http.server 8000
-# visit http://localhost:8000
 ```
-
-## Artwork
-
-21 original acrylic, mixed media works on canvas. Available for private acquisition — contact via the site.
