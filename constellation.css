@@ -1,0 +1,44 @@
+.sky { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.sky canvas, .sky svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stars { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.star {
+  position: absolute;
+  pointer-events: auto;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  transform: translate(-50%, -50%);
+}
+.star::before {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  margin: 0 auto 0.35rem;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(196,180,138,0.55);
+}
+.page-home .campaign-copy {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: cineIn 1.8s 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes cineIn { to { opacity: 1; transform: none; } }
+.look.is-wait {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.look.is-seen { opacity: 1; transform: none; }
+.page-featured .campaign-copy {
+  opacity: 0;
+  animation: cineIn 1.6s 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-home .campaign-copy,
+  .page-featured .campaign-copy { animation: none; opacity: 1; transform: none; }
+  .look.is-wait { opacity: 1; transform: none; }
+  .sky { display: none; }
+}
