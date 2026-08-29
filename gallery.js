@@ -194,6 +194,11 @@ document.addEventListener('DOMContentLoaded', () => {
         statusEl.hidden = false;
         statusEl.textContent = 'Choose original or print.';
       }
+      const row = document.getElementById('inquire-edition-row') || overlay.querySelector('.edition-row');
+      if (row) {
+        row.focus();
+        if (row.scrollIntoView) row.scrollIntoView({ block: 'nearest' });
+      }
       return;
     }
     syncSubject(currentWork);
