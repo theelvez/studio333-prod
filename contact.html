@@ -23,47 +23,51 @@
 
   <main id="main">
     <section class="desk">
-      <p class="label">Clientele</p>
+      <p class="label">Contact</p>
       <h1 class="title-lg">Private inquiries</h1>
       <p class="body">For acquisition inquiries, commissions, or general correspondence.</p>
 
-            <!--
-              ============================================================
-              CONTACT FORM — sends to Dana@studio333gallery.com
-              ============================================================
-              This form uses Formspree (https://formspree.io) to deliver
-              submissions by email. No server code is required, which is
-              why it keeps working no matter where the site is hosted.
+      <!--
+        ============================================================
+        CONTACT FORM — sends to Dana@studio333gallery.com
+        ============================================================
+        This form uses Formspree (https://formspree.io) to deliver
+        submissions by email. No server code is required, which is
+        why it keeps working no matter where the site is hosted.
 
-              ONE-TIME SETUP (must be done once, by anyone):
-                1. Go to https://formspree.io and create a free account
-                   using Dana@studio333gallery.com.
-                2. Create a new form (name it e.g. "studio333 inquiries").
-                3. Formspree gives you a form endpoint that looks like:
-                     https://formspree.io/f/abcdwxyz
-                4. If the Formspree endpoint changes, update the form
-                   `action` URL below (the part after /f/).
-                5. Submit the form once and confirm the verification email
-                   Formspree sends to the configured inbox. Done.
+        ONE-TIME SETUP (must be done once, by anyone):
+          1. Go to https://formspree.io and create a free account
+             using Dana@studio333gallery.com.
+          2. Create a new form (name it e.g. "studio333 inquiries").
+          3. Formspree gives you a form endpoint that looks like:
+               https://formspree.io/f/abcdwxyz
+          4. If the Formspree endpoint changes, update the form
+             `action` URL below (the part after /f/).
+          5. Submit the form once and confirm the verification email
+             Formspree sends to the configured inbox. Done.
 
-              ============================================================
-            -->
+        ============================================================
+      -->
       <form class="desk-form" action="https://formspree.io/f/mbdbvnzg" method="POST">
         <div class="field">
           <label class="label" for="name">Name</label>
-          <input type="text" id="name" name="name" />
+          <input type="text" id="name" name="name" autocomplete="name" />
         </div>
         <div class="field">
           <label class="label" for="email">Email</label>
-          <input type="email" id="email" name="email" required />
+          <input type="email" id="email" name="email" required autocomplete="email" />
         </div>
         <div class="field">
           <label class="label" for="message">Message</label>
-          <textarea id="message" name="message"></textarea>
+          <textarea id="message" name="message" rows="6"></textarea>
         </div>
+
+        <!-- Sets the email subject line Dana sees -->
         <input type="hidden" name="_subject" value="New studio333 inquiry" />
-        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
-        <button type="submit" class="desk-submit text-link">Send inquiry</button>
+        <!-- Simple spam honeypot: bots fill this, humans never see it -->
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <button type="submit" class="text-link desk-submit">Send inquiry</button>
       </form>
     </section>
   </main>
