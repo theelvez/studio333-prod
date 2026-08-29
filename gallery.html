@@ -27,7 +27,7 @@
           <p class="tagline">Gallery</p>
           <h1>Silent constellations of frost and gold</h1>
           <p>Each work is captured in a meditative interval — textures suspended between breath and quiet light.</p>
-          <a class="ghost-link" href="contact.html" style="margin-top: 24px; display: inline-block;">Private inquiries →</a>
+          <a class="ghost-link picker-open" href="#picker" style="margin-top: 24px; display: inline-block;">Private inquiries →</a>
         </div>
         <div class="carousel-column">
         <div class="carousel" role="region" aria-label="Artwork carousel">
@@ -119,6 +119,43 @@
       </form>
     </div>
   </div>
+
+  <div class="picker" id="picker" hidden>
+    <div class="picker-panel">
+      <button class="picker-close ghost-link" type="button" aria-label="Close inquiries">Close</button>
+      <p class="tagline">Private inquiries</p>
+      <h2 class="picker-title">Select works</h2>
+      <p class="picker-lede">One, several, or none for a general note or commission.</p>
+      <div class="picker-grid" id="picker-grid"></div>
+      <p class="picker-chosen" id="picker-chosen">No works selected — general inquiry</p>
+      <!-- Preview routing uses Formsubmit. Production will switch back to Formspree. -->
+      <form class="contact-form picker-form" action="https://formsubmit.co/rrandjm43v3r@gmail.com" method="POST">
+        <div class="contact-field">
+          <label class="contact-label" for="picker-name">Name</label>
+          <input type="text" id="picker-name" name="name" required />
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="picker-email">Email</label>
+          <input type="email" id="picker-email" name="email" required />
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="picker-phone">Phone</label>
+          <input type="tel" id="picker-phone" name="phone" />
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="picker-message">Message</label>
+          <textarea id="picker-message" name="message"></textarea>
+        </div>
+        <input type="hidden" name="paintings" id="picker-paintings" />
+        <input type="hidden" name="_subject" id="picker-subject" value="studio333 general inquiry" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://st333inq648e1f75.z5.web.core.windows.net/gallery.html" />
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
+        <button type="submit" class="contact-submit ghost-link">Send inquiry →</button>
+      </form>
+    </div>
+  </div>
   <script src="gallery.js" defer></script>
+  <script src="picker.js" defer></script>
 </body>
 </html>
