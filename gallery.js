@@ -153,9 +153,21 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify(payload)
       });
-      const json = await res.json().catch(() => ({}));
-      if (!res.ok || json.success === false || json.success === 'false') {
-        throw new Error('send failed');
+      const bodyText = await res.text();
+      let json = {};
+      try { json = JSON.parse(bodyText); } catch (parseErr) {}
+      console.log('FormSubmit', res.status, bodyText);
+      const ok = res.ok && (json.success === true || json.success === 'true');
+      if (!ok) {
+        const raw = (json && (json.message || json.error)) || bodyText || ('HTTP ' + res.status);
+        const lower = String(raw).toLowerCase() + ' ' + res.status;
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.textContent = ((res.status === 429) || /rate|limit|too many/.test(lower))
+            ? 'FormSubmit is rate-limiting, wait a minute'
+            : (String(raw).trim() || 'Could not send. Please try again.');
+        }
+        return;
       }
       form.hidden = true;
       if (statusEl) {
@@ -163,9 +175,10 @@ document.addEventListener('DOMContentLoaded', () => {
         statusEl.textContent = 'Inquiry sent.';
       }
     } catch (err) {
+      console.log('FormSubmit', err);
       if (statusEl) {
         statusEl.hidden = false;
-        statusEl.textContent = 'Could not send. Please try again.';
+        statusEl.textContent = (err && err.message) || 'Could not send. Please try again.';
       }
     } finally {
       if (submit) submit.disabled = false;
