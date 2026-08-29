@@ -94,3 +94,11 @@
 .buy-help {
   margin: 0 0 20px;
 }
+
+.buy-kind {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
