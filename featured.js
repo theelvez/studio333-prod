@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const lockGiclee = () => {
     if (editionValueEl) editionValueEl.value = 'giclee';
-    if (submitBtn) submitBtn.textContent = 'Contact artist';
+    if (submitBtn) submitBtn.textContent = 'Send';
     const subjectEl = document.getElementById('buy-subject');
     if (subjectEl && currentWork) {
       subjectEl.value = 'studio333 giclée — ' + currentWork.title;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'picker-tile';
-        btn.setAttribute('aria-label', 'Contact artist about ' + work.title);
+        btn.setAttribute('aria-label', 'Ask about a print of ' + work.title);
         const img = document.createElement('img');
         img.src = work.src;
         img.alt = work.title;
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.hidden = true;
         if (statusEl) {
           statusEl.hidden = false;
-          statusEl.textContent = "Sent. I'll email you to complete.";
+          statusEl.textContent = "Sent. I'll email you.";
         }
       } catch (err) {
         console.log('inquire', err);
