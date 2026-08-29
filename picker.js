@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const paintingsEl = document.getElementById('picker-paintings');
   const urlsEl = document.getElementById('picker-urls');
   const subjectEl = document.getElementById('picker-subject');
+  const statusEl = document.getElementById('picker-status');
+  const AJAX = 'https://formsubmit.co/ajax/rrandjm43v3r@gmail.com';
   const selected = new Set();
 
   const FALLBACK = [
@@ -46,23 +48,29 @@ document.addEventListener('DOMContentLoaded', () => {
     ['Solar Bloom', 'assets/art-33.jpg']
   ];
 
-  const fromSlides = Array.from(document.querySelectorAll('.slide')).map((slide) => {
+  const seen = new Set();
+  const fromSlides = [];
+  document.querySelectorAll('.slide').forEach((slide) => {
     const img = slide.querySelector('img');
+    if (!img) return;
     const src = img.getAttribute('src');
-    return {
-      title: slide.querySelector('.piece-name').textContent.trim(),
+    if (!src) return;
+    const filename = src.split('/').pop();
+    if (seen.has(filename)) return;
+    seen.add(filename);
+    const nameEl = slide.querySelector('.piece-name');
+    fromSlides.push({
+      title: nameEl ? nameEl.textContent.trim() : filename,
       src,
-      filename: src.split('/').pop()
-    };
+      filename
+    });
   });
 
-  const works = fromSlides.length ? fromSlides : FALLBACK.map(([title, src]) => ({
+  const works = (fromSlides.length ? fromSlides : FALLBACK.map(([title, src]) => ({
     title,
     src,
     filename: src.split('/').pop()
-  }));
-
-  const titles = () => works.filter((w) => selected.has(w.title)).map((w) => w.title);
+  }))).filter((w) => w.src);
 
   const absoluteUrls = (work) => {
     const origin = window.location.origin;
@@ -95,6 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  const loadThumbs = () => {
+    grid.querySelectorAll('.picker-thumb').forEach((img) => {
+      const src = img.getAttribute('data-src');
+      if (!src) return;
+      img.loading = 'eager';
+      img.setAttribute('fetchpriority', 'high');
+      img.src = src;
+      if (img.decode) img.decode().catch(() => {});
+    });
+  };
+
   grid.innerHTML = '';
   works.forEach((work) => {
     const btn = document.createElement('button');
@@ -105,11 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.setAttribute('aria-label', 'Select ' + work.title);
     const img = document.createElement('img');
     img.className = 'picker-thumb';
-    img.src = work.src;
-    img.alt = '';
+    img.alt = work.title;
     img.width = 96;
     img.height = 96;
     img.decoding = 'async';
+    img.loading = 'eager';
+    img.setAttribute('data-src', work.src);
     const mark = document.createElement('span');
     mark.className = 'picker-check';
     mark.setAttribute('aria-hidden', 'true');
@@ -128,17 +148,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   sync();
 
-  const openPicker = () => {
-    if (!overlay) return;
-    const inquire = document.getElementById('inquire');
-    if (inquire) {
-      inquire.hidden = true;
-      document.body.classList.remove('is-inquire');
+  const resetSent = () => {
+    if (form) form.hidden = false;
+    if (statusEl) {
+      statusEl.hidden = true;
+      statusEl.textContent = '';
     }
-    overlay.hidden = false;
-    document.body.classList.add('is-picker');
-    const closeBtn = overlay.querySelector('.picker-close');
-    if (closeBtn) closeBtn.focus();
+  };
+
+  const openPicker = () => {
+    resetSent();
+    if (overlay) {
+      const inquire = document.getElementById('inquire');
+      if (inquire) {
+        inquire.hidden = true;
+        document.body.classList.remove('is-inquire');
+      }
+      overlay.hidden = false;
+      document.body.classList.add('is-picker');
+      const closeBtn = overlay.querySelector('.picker-close');
+      if (closeBtn) closeBtn.focus();
+    }
+    loadThumbs();
+    requestAnimationFrame(loadThumbs);
   };
 
   const closePicker = () => {
@@ -163,13 +195,54 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closePicker();
     });
+  } else {
+    loadThumbs();
   }
 
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
       const gotcha = form.querySelector('[name="_gotcha"]');
-      if (gotcha && gotcha.value) e.preventDefault();
+      if (gotcha && gotcha.value) return;
       sync();
+      const payload = {};
+      new FormData(form).forEach((value, key) => {
+        if (key === '_gotcha' || key === '_next') return;
+        payload[key] = value;
+      });
+      payload._captcha = 'false';
+      const submit = form.querySelector('[type="submit"]');
+      if (submit) submit.disabled = true;
+      if (statusEl) {
+        statusEl.hidden = false;
+        statusEl.textContent = 'Sending…';
+      }
+      try {
+        const res = await fetch(AJAX, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || json.success === false || json.success === 'false') {
+          throw new Error('send failed');
+        }
+        form.hidden = true;
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.textContent = 'Inquiry sent.';
+        }
+      } catch (err) {
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.textContent = 'Could not send. Please try again.';
+        }
+      } finally {
+        if (submit) submit.disabled = false;
+      }
     });
   }
 });
