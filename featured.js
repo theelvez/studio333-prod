@@ -86,13 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.type = 'button';
         btn.className = 'featured-tile';
         btn.setAttribute('aria-label', 'Ask about a print of ' + work.title);
-        const mat = document.createElement('span');
-        mat.className = 'featured-tile-mat';
         const img = document.createElement('img');
         img.src = work.src;
         img.alt = work.title;
-        mat.appendChild(img);
-        btn.appendChild(mat);
+        btn.appendChild(img);
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           openBuy(work);
