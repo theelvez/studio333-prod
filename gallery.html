@@ -3,207 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>studio333 — Gallery</title>
+  <title>studio333 — Collection</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="gallery.js" defer></script>
 </head>
 <body>
-  <div class="page">
-    <header class="site-header">
-      <a href="gallery.html" class="brand">studio333</a>
-      <nav>
-        <a href="gallery.html" class="active">Gallery</a>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast">
+    <a class="wordmark" href="index.html">studio333</a>
+    <nav aria-label="Maison">
+        <a href="gallery.html" class="is-active">Collection</a>
         <a href="featured.html">Featured</a>
         <a href="contact.html">Contact</a>
         <a href="qr.html">Share</a>
-      </nav>
-    </header>
+    </nav>
+  </header>
 
-    <main>
-      <section class="gallery-hero">
-        <div class="gallery-copy">
-          <p class="tagline">Gallery</p>
-          <h1>Silent constellations of frost and gold</h1>
-          <p>Each work is captured in a meditative interval — textures suspended between breath and quiet light.</p>
-          <a class="ghost-link" href="contact.html" style="margin-top: 24px; display: inline-block;">Private inquiries →</a>
-        </div>
-        <div class="carousel-column">
-        <div class="carousel" role="region" aria-label="Artwork carousel">
-          <button class="carousel-control prev" aria-label="Previous artwork">←</button>
-          <div class="slides" aria-live="polite">
-            <figure class="slide active" data-index="0">
-              <img src="assets/art-01.jpg" alt="Winter Light artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Winter Light</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="1">
-              <img src="assets/art-02.jpg" alt="Aerial Frost artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Aerial Frost</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="2">
-              <img src="assets/art-03.jpg" alt="Veiled Branches artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Veiled Branches</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="3">
-              <img src="assets/art-04.jpg" alt="Celestial Drift artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Celestial Drift</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="4">
-              <img src="assets/art-05.jpg" alt="Radiant Mist artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Radiant Mist</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="5">
-              <img src="assets/art-06.jpg" alt="Silent Echoes artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Silent Echoes</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="6">
-              <img src="assets/art-07.jpg" alt="Golden Veil artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Golden Veil</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="7">
-              <img src="assets/art-08.jpg" alt="Twilight Passage artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Twilight Passage</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="8">
-              <img src="assets/art-09.jpg" alt="Frosted Horizon artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Frosted Horizon</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="9">
-              <img src="assets/art-10.jpg" alt="Echoing Stillness artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Echoing Stillness</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="10">
-              <img src="assets/art-11.jpg" alt="Opaline Dusk artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Opaline Dusk</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="11">
-              <img src="assets/art-12.jpg" alt="Shifting Silence artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Shifting Silence</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="12">
-              <img src="assets/art-13.jpg" alt="Gilded Whisper artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Gilded Whisper</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="13">
-              <img src="assets/art-14.jpg" alt="Luminous Veins artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Luminous Veins</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="14">
-              <img src="assets/art-15.jpg" alt="Hushed Aurora artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Hushed Aurora</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="15">
-              <img src="assets/art-16.jpg" alt="Crystalline Path artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Crystalline Path</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="16">
-              <img src="assets/art-17.jpg" alt="Solstice Veil artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Solstice Veil</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="17">
-              <img src="assets/art-18.jpg" alt="Frozen Reverie artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Frozen Reverie</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="18">
-              <img src="assets/art-19.jpg" alt="Silent Prism artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Silent Prism</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="19">
-              <img src="assets/art-20.jpg" alt="Opal Frost artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Opal Frost</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="20">
-              <img src="assets/art-21.jpg" alt="Aurora Drift artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Aurora Drift</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-            <figure class="slide" data-index="21">
-              <img src="assets/art-22.jpg" alt="Radiant Spiral artwork" />
-              <figcaption aria-label="Artwork details">
-                <span class="piece-name">Radiant Spiral</span><br>
-                <span class="piece-meta">Acrylic, mixed media on canvas</span>
-              </figcaption>
-            </figure>
-          </div>
-          <button class="carousel-control next" aria-label="Next artwork">→</button>
-          <div class="carousel-progress-container">
-            <div class="carousel-progress-bar"><div class="carousel-progress"></div></div>
-            <div class="carousel-fraction"><span id="carousel-current">1</span> / <span id="carousel-total">22</span></div>
-          </div>
-        </div>
-        </div>
+  <main id="main">
+    <section class="lookbook-head">
+      <p class="kicker">Collection</p>
+      <h1>The lookbook</h1>
+      <p>Each work is captured in a meditative interval — textures suspended between breath and quiet light.</p>
     </section>
-
-    </main>
-
-    <footer class="footer-nav">
-      <hr style="border: none; border-top: 1px solid #c8c2ba; margin: 0 0 24px; width: 100%;" />
-      <span class="copyright">© 2026 studio333. All rights reserved.</span>
-    </footer>
+    <section class="lookbook" aria-label="Artwork lookbook">
+      <button class="look" type="button" data-index="01" data-src="assets/art-01.jpg" data-title="Winter Light" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-01.jpg" alt="Winter Light artwork" />
+        <div class="look-meta"><span class="look-index">01</span><span class="look-title">Winter Light</span></div>
+      </button>
+      <button class="look" type="button" data-index="02" data-src="assets/art-02.jpg" data-title="Aerial Frost" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-02.jpg" alt="Aerial Frost artwork" />
+        <div class="look-meta"><span class="look-index">02</span><span class="look-title">Aerial Frost</span></div>
+      </button>
+      <button class="look" type="button" data-index="03" data-src="assets/art-03.jpg" data-title="Veiled Branches" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-03.jpg" alt="Veiled Branches artwork" />
+        <div class="look-meta"><span class="look-index">03</span><span class="look-title">Veiled Branches</span></div>
+      </button>
+      <button class="look" type="button" data-index="04" data-src="assets/art-04.jpg" data-title="Celestial Drift" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-04.jpg" alt="Celestial Drift artwork" />
+        <div class="look-meta"><span class="look-index">04</span><span class="look-title">Celestial Drift</span></div>
+      </button>
+      <button class="look" type="button" data-index="05" data-src="assets/art-05.jpg" data-title="Radiant Mist" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-05.jpg" alt="Radiant Mist artwork" />
+        <div class="look-meta"><span class="look-index">05</span><span class="look-title">Radiant Mist</span></div>
+      </button>
+      <button class="look" type="button" data-index="06" data-src="assets/art-06.jpg" data-title="Silent Echoes" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-06.jpg" alt="Silent Echoes artwork" />
+        <div class="look-meta"><span class="look-index">06</span><span class="look-title">Silent Echoes</span></div>
+      </button>
+      <button class="look" type="button" data-index="07" data-src="assets/art-07.jpg" data-title="Golden Veil" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-07.jpg" alt="Golden Veil artwork" />
+        <div class="look-meta"><span class="look-index">07</span><span class="look-title">Golden Veil</span></div>
+      </button>
+      <button class="look" type="button" data-index="08" data-src="assets/art-08.jpg" data-title="Twilight Passage" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-08.jpg" alt="Twilight Passage artwork" />
+        <div class="look-meta"><span class="look-index">08</span><span class="look-title">Twilight Passage</span></div>
+      </button>
+      <button class="look" type="button" data-index="09" data-src="assets/art-09.jpg" data-title="Frosted Horizon" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-09.jpg" alt="Frosted Horizon artwork" />
+        <div class="look-meta"><span class="look-index">09</span><span class="look-title">Frosted Horizon</span></div>
+      </button>
+      <button class="look" type="button" data-index="10" data-src="assets/art-10.jpg" data-title="Echoing Stillness" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-10.jpg" alt="Echoing Stillness artwork" />
+        <div class="look-meta"><span class="look-index">10</span><span class="look-title">Echoing Stillness</span></div>
+      </button>
+      <button class="look" type="button" data-index="11" data-src="assets/art-11.jpg" data-title="Opaline Dusk" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-11.jpg" alt="Opaline Dusk artwork" />
+        <div class="look-meta"><span class="look-index">11</span><span class="look-title">Opaline Dusk</span></div>
+      </button>
+      <button class="look" type="button" data-index="12" data-src="assets/art-12.jpg" data-title="Shifting Silence" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-12.jpg" alt="Shifting Silence artwork" />
+        <div class="look-meta"><span class="look-index">12</span><span class="look-title">Shifting Silence</span></div>
+      </button>
+      <button class="look" type="button" data-index="13" data-src="assets/art-13.jpg" data-title="Gilded Whisper" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-13.jpg" alt="Gilded Whisper artwork" />
+        <div class="look-meta"><span class="look-index">13</span><span class="look-title">Gilded Whisper</span></div>
+      </button>
+      <button class="look" type="button" data-index="14" data-src="assets/art-14.jpg" data-title="Luminous Veins" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-14.jpg" alt="Luminous Veins artwork" />
+        <div class="look-meta"><span class="look-index">14</span><span class="look-title">Luminous Veins</span></div>
+      </button>
+      <button class="look" type="button" data-index="15" data-src="assets/art-15.jpg" data-title="Hushed Aurora" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-15.jpg" alt="Hushed Aurora artwork" />
+        <div class="look-meta"><span class="look-index">15</span><span class="look-title">Hushed Aurora</span></div>
+      </button>
+      <button class="look" type="button" data-index="16" data-src="assets/art-16.jpg" data-title="Crystalline Path" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-16.jpg" alt="Crystalline Path artwork" />
+        <div class="look-meta"><span class="look-index">16</span><span class="look-title">Crystalline Path</span></div>
+      </button>
+      <button class="look" type="button" data-index="17" data-src="assets/art-17.jpg" data-title="Solstice Veil" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-17.jpg" alt="Solstice Veil artwork" />
+        <div class="look-meta"><span class="look-index">17</span><span class="look-title">Solstice Veil</span></div>
+      </button>
+      <button class="look" type="button" data-index="18" data-src="assets/art-18.jpg" data-title="Frozen Reverie" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-18.jpg" alt="Frozen Reverie artwork" />
+        <div class="look-meta"><span class="look-index">18</span><span class="look-title">Frozen Reverie</span></div>
+      </button>
+      <button class="look" type="button" data-index="19" data-src="assets/art-19.jpg" data-title="Silent Prism" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-19.jpg" alt="Silent Prism artwork" />
+        <div class="look-meta"><span class="look-index">19</span><span class="look-title">Silent Prism</span></div>
+      </button>
+      <button class="look" type="button" data-index="20" data-src="assets/art-20.jpg" data-title="Opal Frost" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-20.jpg" alt="Opal Frost artwork" />
+        <div class="look-meta"><span class="look-index">20</span><span class="look-title">Opal Frost</span></div>
+      </button>
+      <button class="look" type="button" data-index="21" data-src="assets/art-21.jpg" data-title="Aurora Drift" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-21.jpg" alt="Aurora Drift artwork" />
+        <div class="look-meta"><span class="look-index">21</span><span class="look-title">Aurora Drift</span></div>
+      </button>
+      <button class="look" type="button" data-index="22" data-src="assets/art-22.jpg" data-title="Radiant Spiral" data-medium="Acrylic, mixed media on canvas">
+        <img src="assets/art-22.jpg" alt="Radiant Spiral artwork" />
+        <div class="look-meta"><span class="look-index">22</span><span class="look-title">Radiant Spiral</span></div>
+      </button>
+    </section>
+  </main>
+  <div class="room" id="room" aria-hidden="true" role="dialog" aria-label="Viewing room">
+    <div class="room-bar">
+      <span class="room-count" id="room-count">01 / 22</span>
+      <button type="button" class="room-close" id="room-close">Close</button>
+    </div>
+    <div class="room-stage">
+      <img id="room-image" alt="" />
+    </div>
+    <div class="room-caption">
+      <div>
+        <h2 id="room-title"></h2>
+        <p id="room-medium">Acrylic, mixed media on canvas</p>
+      </div>
+      <div class="room-nav">
+        <button type="button" id="room-prev">Prev</button>
+        <button type="button" id="room-next">Next</button>
+      </div>
+    </div>
   </div>
-  <script src="gallery.js" defer></script>
+  <footer class="colophon">
+    <span>© 2026 studio333. All rights reserved.</span>
+  </footer>
 </body>
 </html>
