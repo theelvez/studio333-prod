@@ -6,34 +6,33 @@
   <title>studio333 — Share</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="page">
-    <header class="site-header">
-      <a href="gallery.html" class="brand">studio333</a>
-      <nav>
-        <a href="gallery.html">Gallery</a>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast">
+    <a class="wordmark" href="index.html">studio333</a>
+    <nav aria-label="Maison">
+        <a href="gallery.html">Collection</a>
         <a href="featured.html">Featured</a>
         <a href="contact.html">Contact</a>
-        <a href="qr.html" class="active">Share</a>
-      </nav>
-    </header>
+        <a href="qr.html" class="is-active">Share</a>
+    </nav>
+  </header>
 
-    <main>
-      <section class="qr-center">
-        <p class="tagline">Share</p>
-        <img src="assets/QR/qr-code-new.png" alt="QR code" class="qr-code" />
-        <p class="qr-caption">Scan to view gallery</p>
-        <p class="qr-domain">studio333gallery.com</p>
-      </section>
-    </main>
+  <main id="main">
+    <section class="share">
+      <p class="kicker">Share</p>
+      <h1>The house, in hand.</h1>
+      <img src="assets/QR/qr-code-new.png" alt="QR code" class="qr-code" />
+      <p class="qr-caption">Scan to view gallery</p>
+      <p class="qr-domain">studio333gallery.com</p>
+    </section>
+  </main>
+  <footer class="colophon">
+    <span>© 2026 studio333. All rights reserved.</span>
+  </footer>
 
-    <footer class="footer-nav">
-      <hr style="border: none; border-top: 1px solid #c8c2ba; margin: 0 0 24px; width: 100%;" />
-      <span class="copyright">© 2026 studio333. All rights reserved.</span>
-    </footer>
-  </div>
 </body>
 </html>

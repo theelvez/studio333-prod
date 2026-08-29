@@ -2,18 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=gallery.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>studio333</title>
-  <link rel="canonical" href="gallery.html" />
-  <style>
-    body { font-family: 'Inter', sans-serif; background: #f3f0ed; color: #3a3a3a; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-    .notice { text-align: center; letter-spacing: 0.08em; }
-    a { color: inherit; }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="notice">
-    Redirecting to the gallery… If it doesn’t load automatically, <a href="gallery.html">click here</a>.
-  </div>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast">
+    <a class="wordmark" href="index.html">studio333</a>
+    <nav aria-label="Maison">
+        <a href="gallery.html">Collection</a>
+        <a href="featured.html">Featured</a>
+        <a href="contact.html">Contact</a>
+        <a href="qr.html">Share</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <img src="assets/art-01.jpg" alt="Winter Light artwork" />
+      <div class="hero-copy">
+        <p class="kicker">The collection</p>
+        <h1 class="display">studio333</h1>
+        <p class="lede">Silent constellations of frost and gold.</p>
+        <a class="link-line" href="gallery.html">Enter the collection</a>
+      </div>
+    </section>
+    <section class="home-band">
+      <div class="home-split">
+        <div>
+          <p class="kicker">Works</p>
+          <h2>Twenty-two mixed media works on canvas.</h2>
+          <p class="lede">Each work is captured in a meditative interval — textures suspended between breath and quiet light.</p>
+          <a class="link-line" href="gallery.html">View the lookbook</a>
+        </div>
+        <div class="teaser">
+          <p class="kicker">Featured in</p>
+          <h2>Bis on Main — Bellevue</h2>
+          <p class="lede">A selection of works lives within the dining space, where art becomes part of the atmosphere.</p>
+          <a class="link-line" href="featured.html">The campaign</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="colophon">
+    <span>© 2026 studio333. All rights reserved.</span>
+  </footer>
+
 </body>
 </html>
