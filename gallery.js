@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.getElementById('inquire');
   const form = overlay && overlay.querySelector('.inquire-form');
   const statusEl = document.getElementById('inquire-status');
+  const editionValueEl = document.getElementById('inquire-edition-value');
   let index = 0;
+  let currentWork = null;
 
   const workFromSlide = (slide) => {
     const img = slide.querySelector('img');
@@ -39,7 +41,45 @@ document.addEventListener('DOMContentLoaded', () => {
     return origin + '/' + src + '\n' + origin + '/gallery.html#' + stem;
   };
 
+  const editionValue = () => {
+    const on = overlay ? Array.from(overlay.querySelectorAll('.edition-chip.is-on')) : [];
+    const keys = on.map((c) => c.dataset.edition);
+    const out = [];
+    if (keys.includes('original')) out.push('original');
+    if (keys.includes('giclee')) out.push('giclee');
+    return out.join(',');
+  };
+
+  const editionPhrase = (val) => {
+    if (val === 'original,giclee') return 'original + giclée';
+    if (val === 'giclee') return 'giclée';
+    if (val === 'original') return 'original';
+    return '';
+  };
+
+  const resetEdition = () => {
+    if (overlay) {
+      overlay.querySelectorAll('.edition-chip').forEach((chip) => {
+        chip.classList.remove('is-on');
+        chip.setAttribute('aria-pressed', 'false');
+      });
+    }
+    if (editionValueEl) editionValueEl.value = '';
+  };
+
+  const syncSubject = (work) => {
+    const val = editionValue();
+    if (editionValueEl) editionValueEl.value = val;
+    const subjectEl = document.getElementById('inquire-subject');
+    if (!subjectEl || !work) return;
+    const phrase = editionPhrase(val);
+    subjectEl.value = phrase
+      ? 'studio333 inquiry — ' + work.title + ' (' + phrase + ')'
+      : 'studio333 inquiry — ' + work.title;
+  };
+
   const fillForm = (work) => {
+    currentWork = work;
     document.getElementById('inquire-img').src = work.src;
     document.getElementById('inquire-img').alt = work.title + ' artwork';
     document.getElementById('inquire-title').textContent = work.title;
@@ -47,10 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('inquire-painting').value = work.title;
     document.getElementById('inquire-image').value = work.filename;
     document.getElementById('inquire-index').value = String(work.index + 1);
-    document.getElementById('inquire-subject').value =
-      'studio333 inquiry — ' + work.title + ' (' + work.filename + ')';
     const urlsEl = document.getElementById('inquire-urls');
     if (urlsEl) urlsEl.value = absoluteUrls(work);
+    resetEdition();
+    syncSubject(work);
   };
 
   const openInquire = (slide) => {
@@ -71,6 +111,22 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.hidden = true;
     document.body.classList.remove('is-inquire');
   };
+
+  if (overlay) {
+    overlay.querySelectorAll('.edition-chip').forEach((chip) => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        const on = !chip.classList.contains('is-on');
+        chip.classList.toggle('is-on', on);
+        chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+        syncSubject(currentWork);
+        if (statusEl && statusEl.textContent === 'Choose original or print.') {
+          statusEl.hidden = true;
+          statusEl.textContent = '';
+        }
+      });
+    });
+  }
 
   prevBtn.addEventListener('click', () => setActive(index - 1));
   nextBtn.addEventListener('click', () => setActive(index + 1));
@@ -132,6 +188,15 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const gotcha = form.querySelector('[name="_gotcha"]');
     if (gotcha && gotcha.value) return;
+    const val = editionValue();
+    if (!val) {
+      if (statusEl) {
+        statusEl.hidden = false;
+        statusEl.textContent = 'Choose original or print.';
+      }
+      return;
+    }
+    syncSubject(currentWork);
     const payload = {};
     new FormData(form).forEach((value, key) => {
       if (key === '_gotcha' || key === '_next') return;
@@ -172,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
       form.hidden = true;
       if (statusEl) {
         statusEl.hidden = false;
-        statusEl.textContent = 'Inquiry sent.';
+        statusEl.textContent = "Sent. I'll reply by email.";
       }
     } catch (err) {
       console.log('inquire', err);
@@ -189,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const applyHash = () => {
     const h = (location.hash || '').replace('#', '');
-    if (!h) return;
+    if (!h || h === 'picker' || h === 'inquire') return;
     const i = slides.findIndex((s) => {
       const file = s.querySelector('img').getAttribute('src').split('/').pop();
       const stem = file.replace(/\.[^.]+$/, '');
