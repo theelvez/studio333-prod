@@ -78,7 +78,8 @@
         <p class="piece-name" id="inquire-title">Winter Light</p>
         <p class="piece-meta" id="inquire-medium">Acrylic, mixed media on canvas</p>
       </div>
-      <form class="contact-form inquire-form" action="https://formspree.io/f/mbdbvnzg" method="POST">
+      <!-- Preview routing uses Formsubmit. Production will switch back to Formspree. -->
+      <form class="contact-form inquire-form" action="https://formsubmit.co/dreamyisdreamy@gmail.com" method="POST">
         <div class="contact-field">
           <label class="contact-label" for="inquire-name">Name</label>
           <input type="text" id="inquire-name" name="name" required />
@@ -99,6 +100,8 @@
         <input type="hidden" name="image" id="inquire-image" />
         <input type="hidden" name="index" id="inquire-index" />
         <input type="hidden" name="_subject" id="inquire-subject" value="New studio333 inquiry" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://st333inq648e1f75.z5.web.core.windows.net/gallery.html" />
         <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
         <p class="inquire-status" id="inquire-status" hidden></p>
         <button type="submit" class="contact-submit ghost-link">Send inquiry →</button>
