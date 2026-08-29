@@ -118,29 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeInquire();
   });
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  form.addEventListener('submit', (e) => {
     const gotcha = form.querySelector('[name="_gotcha"]');
-    if (gotcha && gotcha.value) return;
-    const data = new FormData(form);
-    const submit = form.querySelector('[type="submit"]');
-    submit.disabled = true;
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' }
-      });
-      if (!res.ok) throw new Error('send failed');
-      form.hidden = true;
-      statusEl.hidden = false;
-      statusEl.textContent = 'Inquiry sent.';
-    } catch (err) {
-      statusEl.hidden = false;
-      statusEl.textContent = 'Could not send. Please try again.';
-    } finally {
-      submit.disabled = false;
-    }
+    if (gotcha && gotcha.value) e.preventDefault();
   });
 
   carousel.setAttribute('tabindex', '0');

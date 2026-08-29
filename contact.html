@@ -31,31 +31,11 @@
             <hr style="border: none; border-top: 1px solid #e0dbd5; margin: 0 0 20px;" />
             <p class="contact-subtext">For acquisition inquiries, commissions, or general correspondence.</p>
 
-            <!--
-              ============================================================
-              CONTACT FORM — sends to Dana@studio333gallery.com
-              ============================================================
-              This form uses Formspree (https://formspree.io) to deliver
-              submissions by email. No server code is required, which is
-              why it keeps working no matter where the site is hosted.
-
-              ONE-TIME SETUP (must be done once, by anyone):
-                1. Go to https://formspree.io and create a free account
-                   using Dana@studio333gallery.com.
-                2. Create a new form (name it e.g. "studio333 inquiries").
-                3. Formspree gives you a form endpoint that looks like:
-                     https://formspree.io/f/abcdwxyz
-                4. If the Formspree endpoint changes, update the form
-                   `action` URL below (the part after /f/).
-                5. Submit the form once and confirm the verification email
-                   Formspree sends to the configured inbox. Done.
-
-              ============================================================
-            -->
+            <!-- Preview routing uses Formsubmit. Production will switch back to Formspree. -->
             <form
               class="contact-form"
               style="margin-top: 32px;"
-              action="https://formspree.io/f/mbdbvnzg"
+              action="https://formsubmit.co/dreamyisdreamy@gmail.com"
               method="POST"
             >
               <div class="contact-field">
@@ -70,12 +50,10 @@
                 <label class="contact-label" for="message">Message</label>
                 <textarea id="message" name="message"></textarea>
               </div>
-
-              <!-- Sets the email subject line Dana sees -->
               <input type="hidden" name="_subject" value="New studio333 inquiry" />
-              <!-- Simple spam honeypot: bots fill this, humans never see it -->
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_next" value="https://st333inq648e1f75.z5.web.core.windows.net/gallery.html" />
               <input type="text" name="_gotcha" style="display:none" />
-
               <button type="submit" class="contact-submit ghost-link">Send inquiry →</button>
             </form>
           </div>
