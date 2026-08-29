@@ -30,37 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return origin + '/' + src + '\n' + origin + '/gallery.html#' + stem;
   };
 
-  const editionValue = () => {
-    const keys = overlay
-      ? Array.from(overlay.querySelectorAll('.edition-chip.is-on')).map((c) => c.dataset.edition)
-      : [];
-    const out = [];
-    if (keys.includes('original')) out.push('original');
-    if (keys.includes('giclee')) out.push('giclee');
-    return out.join(',');
-  };
-
-  const syncEdition = () => {
-    const val = editionValue();
-    if (editionValueEl) editionValueEl.value = val;
-    if (submitBtn) {
-      submitBtn.textContent = val.indexOf('giclee') >= 0
-        ? 'Buy this print'
-        : 'Inquire about the original';
-    }
+  const lockGiclee = () => {
+    if (editionValueEl) editionValueEl.value = 'giclee';
+    if (submitBtn) submitBtn.textContent = 'Buy this print';
     const subjectEl = document.getElementById('buy-subject');
     if (subjectEl && currentWork) {
-      subjectEl.value = val.indexOf('giclee') >= 0
-        ? 'studio333 giclée — ' + currentWork.title
-        : 'studio333 inquiry — ' + currentWork.title + ' (original)';
+      subjectEl.value = 'studio333 giclée — ' + currentWork.title;
     }
-  };
-
-  const setChip = (key, on) => {
-    const chip = overlay.querySelector('.edition-chip[data-edition="' + key + '"]');
-    if (!chip) return;
-    chip.classList.toggle('is-on', on);
-    chip.setAttribute('aria-pressed', on ? 'true' : 'false');
   };
 
   const fill = (work) => {
@@ -73,9 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('buy-painting').value = work.title;
     document.getElementById('buy-image').value = filenameOf(work);
     document.getElementById('buy-urls').value = absoluteUrls(work);
-    setChip('original', false);
-    setChip('giclee', true);
-    syncEdition();
+    lockGiclee();
   };
 
   const openBuy = (work) => {
@@ -96,20 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.hidden = true;
     document.body.classList.remove('is-inquire');
   };
-
-  overlay.querySelectorAll('.edition-chip').forEach((chip) => {
-    chip.addEventListener('click', (e) => {
-      e.preventDefault();
-      const on = !chip.classList.contains('is-on');
-      chip.classList.toggle('is-on', on);
-      chip.setAttribute('aria-pressed', on ? 'true' : 'false');
-      syncEdition();
-      if (statusEl && statusEl.textContent === 'Choose original or print.') {
-        statusEl.hidden = true;
-        statusEl.textContent = '';
-      }
-    });
-  });
 
   overlay.querySelector('.inquire-close').addEventListener('click', closeBuy);
   overlay.addEventListener('click', (e) => {
@@ -155,20 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const gotcha = form.querySelector('[name="_gotcha"]');
       if (gotcha && gotcha.value) return;
-      const val = editionValue();
-      if (!val) {
-        if (statusEl) {
-          statusEl.hidden = false;
-          statusEl.textContent = 'Choose original or print.';
-        }
-        const row = document.getElementById('buy-edition-row');
-        if (row) {
-          row.focus();
-          if (row.scrollIntoView) row.scrollIntoView({ block: 'nearest' });
-        }
-        return;
-      }
-      syncEdition();
+      lockGiclee();
       const payload = {};
       new FormData(form).forEach((value, key) => {
         if (key === '_gotcha' || key === '_next') return;
