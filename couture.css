@@ -85,6 +85,7 @@
 .frame {
   perspective: 1600px;
   transform-style: preserve-3d;
+  cursor: zoom-in;
 }
 
 .canvas {
@@ -328,4 +329,79 @@
     opacity: 1;
     letter-spacing: 0.02em;
   }
+
+  .zoom,
+  .zoom-canvas {
+    transition: none;
+  }
+
+  .zoom-canvas {
+    transform: none;
+  }
+}
+
+.zoom {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #f3efe6;
+  color: #0b0b0b;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 1.15rem var(--gutter) 1.35rem;
+  opacity: 1;
+  transition: opacity 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.zoom[hidden] {
+  display: none !important;
+}
+
+.zoom.is-enter {
+  opacity: 0;
+}
+
+.zoom-close {
+  justify-self: end;
+  padding: 0.6rem 0;
+  color: #8a8478;
+}
+
+.zoom-close:hover,
+.zoom-close:focus-visible {
+  color: #0b0b0b;
+}
+
+.zoom-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  cursor: zoom-out;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.zoom-canvas {
+  transform: scale(0.92);
+  transition: transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.zoom.is-open .zoom-canvas {
+  transform: none;
+}
+
+.zoom-canvas img {
+  max-width: min(92vw, 72rem);
+  max-height: min(82dvh, 900px);
+}
+
+.zoom-cap {
+  margin: 0.85rem 0 0;
+  text-align: center;
+  color: #8a8478;
+}
+
+body.is-zoom {
+  overflow: hidden;
 }
