@@ -103,23 +103,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const loadThumbs = () => {
-    grid.querySelectorAll('.picker-thumb').forEach((img) => {
-      const src = img.getAttribute('data-src');
-      if (!src) return;
-      img.loading = 'eager';
-      img.setAttribute('fetchpriority', 'high');
-      img.src = src;
-      if (img.decode) img.decode().catch(() => {});
-    });
+  const revealTile = (btn, img) => {
+    if (img.naturalWidth) btn.hidden = false;
   };
 
   grid.innerHTML = '';
   works.forEach((work) => {
+    const probe = new Image();
+    probe.decoding = 'async';
+    probe.src = work.src;
+
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'picker-tile';
+    btn.hidden = true;
     btn.dataset.title = work.title;
+    btn.dataset.file = work.filename;
     btn.setAttribute('aria-pressed', 'false');
     btn.setAttribute('aria-label', 'Select ' + work.title);
     const img = document.createElement('img');
@@ -129,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     img.height = 96;
     img.decoding = 'async';
     img.loading = 'eager';
-    img.setAttribute('data-src', work.src);
+    img.setAttribute('fetchpriority', 'high');
     const mark = document.createElement('span');
     mark.className = 'picker-check';
     mark.setAttribute('aria-hidden', 'true');
@@ -144,6 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
       else selected.add(work.title);
       sync();
     });
+    img.addEventListener('load', () => revealTile(btn, img));
+    img.addEventListener('error', () => btn.remove());
+    img.src = work.src;
+    if (img.complete && img.naturalWidth) revealTile(btn, img);
     grid.appendChild(btn);
   });
   sync();
@@ -169,8 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const closeBtn = overlay.querySelector('.picker-close');
       if (closeBtn) closeBtn.focus();
     }
-    loadThumbs();
-    requestAnimationFrame(loadThumbs);
   };
 
   const closePicker = () => {
@@ -195,8 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closePicker();
     });
-  } else {
-    loadThumbs();
   }
 
   if (form) {
@@ -215,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (submit) submit.disabled = true;
       if (statusEl) {
         statusEl.hidden = false;
-        statusEl.textContent = 'Sending…';
+        statusEl.textContent = 'Sending\u2026';
       }
       try {
         const res = await fetch(AJAX, {
