@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlsEl = document.getElementById('picker-urls');
   const subjectEl = document.getElementById('picker-subject');
   const statusEl = document.getElementById('picker-status');
-  const AJAX = 'https://formsubmit.co/ajax/rrandjm43v3r@gmail.com';
+  const AJAX = 'https://st333inqfn29.azurewebsites.net/api/inquire';
   const selected = new Set();
 
   const FALLBACK = [
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const raw = (json && (json.message || json.error)) || bodyText || (res ? ('HTTP ' + res.status) : 'network error');
     const lower = String(raw).toLowerCase() + ' ' + (res ? String(res.status) : '');
     if ((res && res.status === 429) || /rate|limit|too many/.test(lower)) {
-      return 'FormSubmit is rate-limiting, wait a minute';
+      return 'Could not send. Please try again.';
     }
     const text = String(raw).trim();
     return text || 'Could not send. Please try again.';
@@ -129,13 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.dataset.file = work.filename;
     btn.setAttribute('aria-pressed', 'false');
     btn.setAttribute('aria-label', 'Select ' + work.title);
-    const img = document.createElement('img');
+    const img = work.source ? work.source.cloneNode(true) : document.createElement('img');
     img.className = 'picker-thumb';
     img.alt = work.title;
+    img.width = 96;
+    img.height = 96;
     img.loading = 'eager';
-    img.decoding = 'async';
-    img.removeAttribute('width');
-    img.removeAttribute('height');
+    img.decoding = 'sync';
+    img.removeAttribute('hidden');
+    img.removeAttribute('srcset');
     img.src = work.source && work.source.currentSrc ? work.source.currentSrc : work.src;
     const mark = document.createElement('span');
     mark.className = 'picker-check';
@@ -232,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const bodyText = await res.text();
         let json = {};
         try { json = JSON.parse(bodyText); } catch (err) {}
-        console.log('FormSubmit', res.status, bodyText);
+        console.log('inquire', res.status, bodyText);
         const ok = res.ok && (json.success === true || json.success === 'true');
         if (!ok) {
           if (statusEl) statusEl.textContent = failMessage(res, bodyText, json);
@@ -244,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
           statusEl.textContent = 'Inquiry sent.';
         }
       } catch (err) {
-        console.log('FormSubmit', err);
+        console.log('inquire', err);
         if (statusEl) {
           statusEl.hidden = false;
           statusEl.textContent = failMessage(null, err && err.message, {});
