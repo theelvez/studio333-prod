@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (missing) {
         if (statusEl) {
           statusEl.hidden = false;
-          statusEl.textContent = 'Choose original or print.';
+          statusEl.textContent = 'Choose original or print for each work.';
         }
         return;
       }
