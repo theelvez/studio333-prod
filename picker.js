@@ -73,12 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (chosenEl) {
       chosenEl.textContent = list.length
-        ? (list.length === 1 ? '1 work selected' : list.length + ' works selected')
-        : 'No works selected — general inquiry';
+        ? list.length + ' selected'
+        : 'None selected — general inquiry';
     }
     grid.querySelectorAll('.picker-tile').forEach((btn) => {
-      btn.classList.toggle('is-on', selected.has(btn.dataset.title));
-      btn.setAttribute('aria-pressed', selected.has(btn.dataset.title) ? 'true' : 'false');
+      const on = selected.has(btn.dataset.title);
+      btn.classList.toggle('is-on', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      const mark = btn.querySelector('.picker-check');
+      if (mark) mark.hidden = !on;
     });
   };
 
@@ -89,9 +92,24 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.className = 'picker-tile';
     btn.dataset.title = work.title;
     btn.setAttribute('aria-pressed', 'false');
-    btn.setAttribute('aria-label', work.title);
-    btn.innerHTML = '<img src="' + work.src + '" alt="">';
-    btn.addEventListener('click', () => {
+    btn.setAttribute('aria-label', 'Select ' + work.title);
+    const img = document.createElement('img');
+    img.className = 'picker-thumb';
+    img.src = work.src;
+    img.alt = '';
+    img.width = 96;
+    img.height = 96;
+    img.decoding = 'async';
+    const mark = document.createElement('span');
+    mark.className = 'picker-check';
+    mark.setAttribute('aria-hidden', 'true');
+    mark.hidden = true;
+    mark.textContent = '\u2713';
+    btn.appendChild(img);
+    btn.appendChild(mark);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       if (selected.has(work.title)) selected.delete(work.title);
       else selected.add(work.title);
       sync();
