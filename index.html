@@ -6,51 +6,46 @@
   <title>studio333</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="skin-dark page-home">
   <a class="skip" href="#main">Skip to content</a>
   <header class="mast">
     <a class="wordmark" href="index.html">studio333</a>
-    <nav aria-label="Maison">
-        <a href="gallery.html">Collection</a>
-        <a href="featured.html">Featured</a>
-        <a href="contact.html">Contact</a>
-        <a href="qr.html">Share</a>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="gallery.html">Collection</a>
+      <a class="nav-link" href="featured.html">Featured</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="nav-link" href="qr.html">Share</a>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero">
-      <img src="assets/art-01.jpg" alt="Winter Light artwork" />
-      <div class="hero-copy">
-        <p class="kicker">The collection</p>
+    <section class="campaign" aria-label="Opening">
+      <img class="campaign-image" src="assets/art-01.jpg" alt="Winter Light" />
+      <div class="campaign-veil" aria-hidden="true"></div>
+      <div class="campaign-copy">
         <h1 class="display">studio333</h1>
-        <p class="lede">Silent constellations of frost and gold.</p>
-        <a class="link-line" href="gallery.html">Enter the collection</a>
+        <p class="lede">Silent constellations of frost and gold</p>
+        <a class="text-link" href="gallery.html">Enter Collection</a>
       </div>
     </section>
-    <section class="home-band">
-      <div class="home-split">
-        <div>
-          <p class="kicker">Works</p>
-          <h2>Twenty-two mixed media works on canvas.</h2>
-          <p class="lede">Each work is captured in a meditative interval — textures suspended between breath and quiet light.</p>
-          <a class="link-line" href="gallery.html">View the lookbook</a>
-        </div>
-        <div class="teaser">
-          <p class="kicker">Featured in</p>
-          <h2>Bis on Main — Bellevue</h2>
-          <p class="lede">A selection of works lives within the dining space, where art becomes part of the atmosphere.</p>
-          <a class="link-line" href="featured.html">The campaign</a>
-        </div>
+
+    <section class="home-featured" aria-labelledby="featured-heading">
+      <p class="label">Featured in</p>
+      <h2 id="featured-heading" class="title-lg">Bis on Main — Bellevue</h2>
+      <p class="body">A selection of works lives within the dining space, where art becomes part of the atmosphere.</p>
+      <div class="link-row">
+        <a class="text-link" href="featured.html">Featured</a>
+        <a class="text-link" href="https://bobbymoorerestaurants.com/" target="_blank" rel="noopener">Bis on Main</a>
       </div>
     </section>
   </main>
-  <footer class="colophon">
-    <span>© 2026 studio333. All rights reserved.</span>
-  </footer>
 
+  <footer class="colophon">
+    <span class="copyright">© 2026 studio333. All rights reserved.</span>
+    <a class="nav-link" href="qr.html">Share</a>
+  </footer>
 </body>
 </html>

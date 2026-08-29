@@ -6,33 +6,37 @@
   <title>studio333 — Share</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="skin-dark page-share">
   <a class="skip" href="#main">Skip to content</a>
   <header class="mast">
     <a class="wordmark" href="index.html">studio333</a>
-    <nav aria-label="Maison">
-        <a href="gallery.html">Collection</a>
-        <a href="featured.html">Featured</a>
-        <a href="contact.html">Contact</a>
-        <a href="qr.html" class="is-active">Share</a>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="gallery.html">Collection</a>
+      <a class="nav-link" href="featured.html">Featured</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="nav-link is-current" href="qr.html" aria-current="page">Share</a>
     </nav>
   </header>
 
   <main id="main">
-    <section class="share">
-      <p class="kicker">Share</p>
-      <h1>The house, in hand.</h1>
-      <img src="assets/QR/qr-code-new.png" alt="QR code" class="qr-code" />
-      <p class="qr-caption">Scan to view gallery</p>
-      <p class="qr-domain">studio333gallery.com</p>
+    <section class="share-card">
+      <p class="label">Share</p>
+      <h1 class="display display--quiet">studio333</h1>
+      <figure class="share-mark">
+        <img src="assets/QR/qr-code-new.png" alt="QR code" />
+        <figcaption>
+          <p class="qr-caption">Scan to view gallery</p>
+          <p class="qr-domain">studio333gallery.com</p>
+        </figcaption>
+      </figure>
     </section>
   </main>
-  <footer class="colophon">
-    <span>© 2026 studio333. All rights reserved.</span>
-  </footer>
 
+  <footer class="colophon">
+    <span class="copyright">© 2026 studio333. All rights reserved.</span>
+  </footer>
 </body>
 </html>
