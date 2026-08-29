@@ -84,12 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
       BIS_WORKS.forEach((work) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'picker-tile';
+        btn.className = 'featured-tile';
         btn.setAttribute('aria-label', 'Ask about a print of ' + work.title);
+        const mat = document.createElement('span');
+        mat.className = 'featured-tile-mat';
         const img = document.createElement('img');
         img.src = work.src;
         img.alt = work.title;
-        btn.appendChild(img);
+        mat.appendChild(img);
+        btn.appendChild(mat);
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           openBuy(work);
