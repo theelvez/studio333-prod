@@ -8,8 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="constellation.css" />
 </head>
-<body class="skin-dark page-home">
+<body class="skin-dark page-home option-constellation">
   <a class="skip" href="#main">Skip to content</a>
   <header class="mast">
     <a class="wordmark" href="index.html">studio333</a>
@@ -25,6 +26,34 @@
     <section class="campaign" aria-label="Opening">
       <img class="campaign-image" src="assets/art-01.jpg" alt="Winter Light" />
       <div class="campaign-veil" aria-hidden="true"></div>
+      <div class="sky" aria-hidden="true">
+        <canvas id="dust"></canvas>
+        <svg id="lines"></svg>
+      </div>
+      <div class="stars">
+        <a class="star" style="left:12%;top:28%" href="gallery.html#work-01" aria-label="Winter Light">01</a>
+        <a class="star" style="left:22%;top:18%" href="gallery.html#work-02" aria-label="Aerial Frost">02</a>
+        <a class="star" style="left:31%;top:34%" href="gallery.html#work-03" aria-label="Veiled Branches">03</a>
+        <a class="star" style="left:41%;top:22%" href="gallery.html#work-04" aria-label="Celestial Drift">04</a>
+        <a class="star" style="left:52%;top:30%" href="gallery.html#work-05" aria-label="Radiant Mist">05</a>
+        <a class="star" style="left:63%;top:16%" href="gallery.html#work-06" aria-label="Silent Echoes">06</a>
+        <a class="star" style="left:74%;top:27%" href="gallery.html#work-07" aria-label="Golden Veil">07</a>
+        <a class="star" style="left:86%;top:20%" href="gallery.html#work-08" aria-label="Twilight Passage">08</a>
+        <a class="star" style="left:18%;top:48%" href="gallery.html#work-09" aria-label="Frosted Horizon">09</a>
+        <a class="star" style="left:29%;top:56%" href="gallery.html#work-10" aria-label="Echoing Stillness">10</a>
+        <a class="star" style="left:44%;top:46%" href="gallery.html#work-11" aria-label="Opaline Dusk">11</a>
+        <a class="star" style="left:58%;top:52%" href="gallery.html#work-12" aria-label="Shifting Silence">12</a>
+        <a class="star" style="left:71%;top:44%" href="gallery.html#work-13" aria-label="Gilded Whisper">13</a>
+        <a class="star" style="left:83%;top:50%" href="gallery.html#work-14" aria-label="Luminous Veins">14</a>
+        <a class="star" style="left:15%;top:72%" href="gallery.html#work-15" aria-label="Hushed Aurora">15</a>
+        <a class="star" style="left:27%;top:78%" href="gallery.html#work-16" aria-label="Crystalline Path">16</a>
+        <a class="star" style="left:39%;top:68%" href="gallery.html#work-17" aria-label="Solstice Veil">17</a>
+        <a class="star" style="left:51%;top:76%" href="gallery.html#work-18" aria-label="Frozen Reverie">18</a>
+        <a class="star" style="left:64%;top:70%" href="gallery.html#work-19" aria-label="Silent Prism">19</a>
+        <a class="star" style="left:76%;top:80%" href="gallery.html#work-20" aria-label="Opal Frost">20</a>
+        <a class="star" style="left:88%;top:66%" href="gallery.html#work-21" aria-label="Aurora Drift">21</a>
+        <a class="star" style="left:48%;top:88%" href="gallery.html#work-22" aria-label="Radiant Spiral">22</a>
+      </div>
       <div class="campaign-copy">
         <h1 class="display">studio333</h1>
         <p class="lede">Silent constellations of frost and gold</p>
@@ -47,5 +76,6 @@
     <span class="copyright">© 2026 studio333. All rights reserved.</span>
     <a class="nav-link" href="qr.html">Share</a>
   </footer>
+  <script src="constellation.js" defer></script>
 </body>
 </html>
