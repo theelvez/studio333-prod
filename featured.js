@@ -1,14 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Swap-ready wall list. Preview stand-ins until Rasa names the wall.
-  // Do not fall back to the full 33-work gallery.
-  // Rasa only: (1) wall titles (2) giclée price/size (3) EMAIL_TO to the artist.
+  // Named wall at Bis. Do not fall back to the full 33-work gallery.
+  // Rasa only remaining: giclée price/size, EMAIL_TO to the artist.
   const BIS_WORKS = [
-    { title: 'Winter Light', src: 'assets/art-01.jpg', medium: 'Acrylic, mixed media on canvas', standIn: true },
-    { title: 'Aerial Frost', src: 'assets/art-02.jpg', medium: 'Acrylic, mixed media on canvas', standIn: true },
-    { title: 'Veiled Branches', src: 'assets/art-03.jpg', medium: 'Acrylic, mixed media on canvas', standIn: true },
-    { title: 'Celestial Drift', src: 'assets/art-04.jpg', medium: 'Acrylic, mixed media on canvas', standIn: true },
-    { title: 'Radiant Mist', src: 'assets/art-05.jpg', medium: 'Acrylic, mixed media on canvas', standIn: true },
-    { title: 'Silent Echoes', src: 'assets/art-06.jpg', medium: 'Acrylic, mixed media on canvas', standIn: true }
+    { title: 'Golden Veil', src: 'assets/art-07.jpg', medium: 'Acrylic, mixed media on canvas' },
+    { title: 'Twilight Passage', src: 'assets/art-08.jpg', medium: 'Acrylic, mixed media on canvas' }
   ];
 
   const AJAX = 'https://st333inqfn29.azurewebsites.net/api/inquire';
@@ -95,12 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = work.src;
         img.alt = work.title;
         btn.appendChild(img);
-        if (work.standIn) {
-          const mark = document.createElement('span');
-          mark.className = 'standin-mark';
-          mark.textContent = 'STAND-IN';
-          btn.appendChild(mark);
-        }
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           openBuy(work);
