@@ -8,8 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter+Tight:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="couture.css" />
 </head>
-<body class="skin-dark page-home">
+<body class="page-couture">
   <a class="skip" href="#main">Skip to content</a>
   <header class="mast">
     <a class="wordmark" href="index.html">studio333</a>
@@ -22,17 +23,40 @@
   </header>
 
   <main id="main">
-    <section class="campaign" aria-label="Opening">
-      <img class="campaign-image" src="assets/art-01.jpg" alt="Winter Light" />
-      <div class="campaign-veil" aria-hidden="true"></div>
-      <div class="campaign-copy">
-        <h1 class="display">studio333</h1>
-        <p class="lede">Silent constellations of frost and gold</p>
-        <a class="text-link" href="gallery.html">Enter Collection</a>
+    <section class="plane" aria-roledescription="carousel" aria-label="The collection">
+      <p class="plane-kicker label">The collection</p>
+      <p class="plane-lede">Silent constellations of frost and gold</p>
+
+      <div class="plane-row">
+        <button class="plane-nav plane-prev" type="button" aria-label="Previous work">
+          <span class="plane-nav-mark" aria-hidden="true">Prev</span>
+        </button>
+
+        <div class="stage" id="stage">
+          <div class="frame" id="frame" role="button" tabindex="0" aria-label="View Winter Light full screen">
+            <figure class="canvas">
+              <img id="plane-img" src="assets/art-01.jpg" alt="Winter Light" />
+              <span class="canvas-grain" aria-hidden="true"></span>
+              <span class="canvas-light" aria-hidden="true"></span>
+              <span class="canvas-rebate" aria-hidden="true"></span>
+            </figure>
+          </div>
+        </div>
+
+        <button class="plane-nav plane-next" type="button" aria-label="Next work">
+          <span class="plane-nav-mark" aria-hidden="true">Next</span>
+        </button>
       </div>
+
+      <div class="plane-cap" aria-live="polite">
+        <p class="label plane-num" id="plane-num">01</p>
+        <h1 class="plane-title" id="plane-title">Winter Light</h1>
+        <p class="body plane-medium">Acrylic, mixed media on canvas</p>
+      </div>
+      <p class="plane-count" id="plane-count" aria-hidden="true">01 / 22</p>
     </section>
 
-    <section class="home-featured" aria-labelledby="featured-heading">
+    <section class="home-featured couture-bis" aria-labelledby="featured-heading">
       <p class="label">Featured in</p>
       <h2 id="featured-heading" class="title-lg">Bis on Main — Bellevue</h2>
       <p class="body">A selection of works lives within the dining space, where art becomes part of the atmosphere.</p>
@@ -45,7 +69,23 @@
 
   <footer class="colophon">
     <span class="copyright">© 2026 studio333. All rights reserved.</span>
-    <a class="nav-link" href="qr.html">Share</a>
+    <a class="nav-link" href="contact.html">Contact</a>
   </footer>
+
+  <div class="zoom" id="zoom" hidden>
+    <button class="zoom-close" type="button" aria-label="Close full screen">
+      <span class="plane-nav-mark">Close</span>
+    </button>
+    <div class="zoom-stage" id="zoom-stage">
+      <figure class="canvas zoom-canvas">
+        <img id="zoom-img" src="assets/art-01.jpg" alt="Winter Light" />
+        <span class="canvas-grain" aria-hidden="true"></span>
+        <span class="canvas-light" aria-hidden="true"></span>
+        <span class="canvas-rebate" aria-hidden="true"></span>
+      </figure>
+    </div>
+    <p class="zoom-cap label" id="zoom-cap">01  Winter Light</p>
+  </div>
+  <script src="couture.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,37 @@
+/* Collection lookbook — same canvas, smaller stills */
+
+.page-collection .look-open {
+  cursor: zoom-in;
+}
+
+.page-collection .look-open:hover img,
+.page-collection .look-open:focus-visible img {
+  opacity: 1;
+}
+
+.page-collection .look-canvas {
+  display: block;
+  width: 100%;
+  transform: none;
+}
+
+.page-collection .look-canvas img {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  height: auto;
+}
+
+.page-collection .look--bleed .look-canvas img {
+  height: min(88vh, 58rem);
+  object-fit: cover;
+}
+
+.page-collection .look-canvas .canvas-light {
+  animation: none;
+  background: radial-gradient(
+    18rem circle at 38% 28%,
+    rgba(255, 248, 230, 0.2),
+    transparent 62%
+  );
+}
