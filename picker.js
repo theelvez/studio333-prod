@@ -219,6 +219,31 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   sync();
 
+  const applyQueryPreselect = () => {
+    const params = new URLSearchParams(location.search);
+    const worksParam = params.get('works');
+    if (!worksParam) return;
+    const editionParam = (params.get('edition') || '').toLowerCase();
+    const wanted = worksParam.split(',').map((s) => {
+      try { return decodeURIComponent(s.trim()); } catch (err) { return s.trim(); }
+    }).filter(Boolean);
+    const titleByLower = {};
+    works.forEach((w) => { titleByLower[w.title.toLowerCase()] = w.title; });
+    wanted.forEach((title) => {
+      const match = titleByLower[title.toLowerCase()];
+      if (!match) return;
+      selected.add(match);
+      if (editionParam === 'giclee' || editionParam === 'original') {
+        if (!editions.has(match)) editions.set(match, new Set());
+        editions.get(match).add(editionParam === 'giclee' ? 'giclee' : 'original');
+      } else if (editionParam === 'original,giclee' || editionParam === 'giclee,original') {
+        editions.set(match, new Set(['original', 'giclee']));
+      }
+    });
+    sync();
+  };
+  applyQueryPreselect();
+
   const resetSent = () => {
     if (form) form.hidden = false;
     if (statusEl) {
