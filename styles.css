@@ -305,6 +305,28 @@ nav a.active {
   margin: 0;
 }
 
+.social-ig {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0 8px;
+  color: var(--muted);
+  text-decoration: none;
+  min-width: 44px;
+  min-height: 44px;
+  transition: color 0.2s ease;
+}
+
+.social-ig:hover,
+.social-ig:focus {
+  color: var(--accent);
+}
+
+.social-ig-icon {
+  display: block;
+}
+
+
 .contact-form {
   display: flex;
   flex-direction: column;
