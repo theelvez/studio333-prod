@@ -288,6 +288,12 @@ nav a.active {
   align-items: start;
 }
 
+.contact-section.contact-simple {
+  grid-template-columns: 1fr;
+  max-width: 420px;
+}
+
+
 .contact-intro h1 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
