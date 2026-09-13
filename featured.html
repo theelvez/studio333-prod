@@ -8,8 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="inquire.css" />
-  <link rel="stylesheet" href="featured.css" />
 </head>
 <body>
   <div class="page">
@@ -24,22 +22,18 @@
       </nav>
     </header>
 
-    <main class="featured-main">
-      <p class="tagline">On view</p>
-      <h1 class="exhibition-title">Bis on Main</h1>
-      <p class="exhibition-body">Tap the work on the wall to ask about a giclée.</p>
-      <a class="ghost-link contact-art" href="#works">Ask about a print</a>
-
-      <section class="wall-works" id="works">
-        <div class="featured-grid" id="bis-grid"></div>
-        <p class="wall-empty" id="bis-empty" hidden>Works on view, coming soon.</p>
+    <main>
+      <section class="exhibition-entry">
+        <div class="exhibition-meta">
+          <p class="tagline">Featured in</p>
+          <h2 class="exhibition-title">Bis on Main — Bellevue</h2>
+          <p class="exhibition-body">A selection of works lives within the dining space, where art becomes part of the atmosphere.</p>
+          <a class="ghost-link exhibition-visit" href="https://bobbymoorerestaurants.com/" target="_blank" rel="noopener" style="margin-top: 24px; display: inline-block;">Visit Bis on Main →</a>
+        </div>
+        <div class="exhibition-image-block">
+          <img src="assets/bis/Bis_1.jpg" alt="Studio333 works at Bis on Main, Bellevue" class="exhibition-img" />
+        </div>
       </section>
-
-      <div class="exhibition-image-block">
-        <img src="assets/bis/Bis_1.jpg" alt="Studio333 works at Bis on Main, Bellevue" class="exhibition-img" />
-      </div>
-      <a class="ghost-link exhibition-visit" href="https://bobbymoorerestaurants.com/" target="_blank" rel="noopener">Visit Bis on Main →</a>
-      <a class="ghost-link see-all" href="gallery.html">See all works →</a>
     </main>
 
     <footer class="footer-nav">
@@ -47,50 +41,5 @@
       <span class="copyright">© 2026 studio333. All rights reserved.</span>
     </footer>
   </div>
-
-  <div class="inquire" id="buy" hidden>
-    <div class="inquire-panel">
-      <button class="inquire-close ghost-link" type="button" aria-label="Close">Close</button>
-      <div class="inquire-work">
-        <img id="buy-img" src="assets/framed/art-08.jpg" alt="Twilight Passage artwork" />
-        <p class="piece-name" id="buy-title">Twilight Passage</p>
-        <p class="piece-meta" id="buy-medium">Acrylic, mixed media on canvas</p>
-        <p class="buy-kind">Giclée print</p>
-      </div>
-      <p class="edition-help buy-help">The original is on the wall. This is a giclée.</p>
-      <form class="contact-form inquire-form" id="buy-form" action="https://st333inqfn29.azurewebsites.net/api/inquire" method="POST">
-        <div class="contact-field">
-          <label class="contact-label" for="buy-name">Name</label>
-          <input type="text" id="buy-name" name="name" required />
-        </div>
-        <div class="contact-field">
-          <label class="contact-label" for="buy-email">Email</label>
-          <input type="email" id="buy-email" name="email" required />
-        </div>
-        <div class="contact-field">
-          <label class="contact-label" for="buy-phone">Phone</label>
-          <input type="tel" id="buy-phone" name="phone" />
-        </div>
-        <div class="contact-field">
-          <label class="contact-label" for="buy-message">Message</label>
-          <textarea id="buy-message" name="message" placeholder="Size or framing, if you know"></textarea>
-        </div>
-        <input type="hidden" name="painting" id="buy-painting" />
-        <input type="hidden" name="image" id="buy-image" />
-        <input type="hidden" name="painting_urls" id="buy-urls" />
-        <input type="hidden" name="edition" id="buy-edition-value" value="giclee" />
-        <input type="hidden" name="buying" value="Giclée print" />
-        <input type="hidden" name="source" value="featured" />
-        <input type="hidden" name="_subject" id="buy-subject" value="studio333 giclée" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://st333inq648e1f75.z5.web.core.windows.net/featured.html" />
-        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
-        <p class="inquire-status" id="buy-status" hidden></p>
-        <button type="submit" class="contact-submit ghost-link" id="buy-submit">Send</button>
-      </form>
-    </div>
-  </div>
-
-  <script src="featured.js"></script>
 </body>
 </html>
