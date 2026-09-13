@@ -234,9 +234,7 @@ nav a.active {
   letter-spacing: 0.08em;
 }
 
-
 /* ── Featured ── */
-
 
 .exhibition-entry {
   display: grid;
@@ -304,28 +302,6 @@ nav a.active {
   line-height: 1.9;
   margin: 0;
 }
-
-.social-ig {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 16px 0 8px;
-  color: var(--muted);
-  text-decoration: none;
-  min-width: 44px;
-  min-height: 44px;
-  transition: color 0.2s ease;
-}
-
-.social-ig:hover,
-.social-ig:focus {
-  color: var(--accent);
-}
-
-.social-ig-icon {
-  display: block;
-}
-
 
 .contact-form {
   display: flex;
@@ -478,44 +454,3 @@ nav a.active {
   }
 }
 
-
-
-
-
-
-
-.contact-direct {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-}
-
-.contact-mail {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  text-decoration: none;
-  min-width: 44px;
-  min-height: 44px;
-  transition: color 0.2s ease;
-}
-
-.contact-mail:hover,
-.contact-mail:focus {
-  color: var(--accent);
-}
-
-.contact-mail-icon {
-  display: block;
-}
-
-.contact-direct .social-ig {
-  margin: 0;
-}
-
-.contact-direct .social-ig-icon {
-  width: 28px;
-  height: 28px;
-}
