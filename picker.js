@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chosenEl) {
       chosenEl.textContent = list.length
         ? list.length + ' selected'
-        : 'None selected — general inquiry';
+        : 'Select one or more works to inquire';
     }
     grid.querySelectorAll('.picker-tile').forEach((btn) => {
       const on = selected.has(btn.dataset.title);
