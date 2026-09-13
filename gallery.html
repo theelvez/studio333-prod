@@ -137,15 +137,15 @@
       <p class="tagline">Private inquiries</p>
       <h2 class="picker-title">Select artwork</h2>
       <p class="picker-lede">Original, print, or both. Or send a general note.</p>
-      <details class="giclee-info picker-giclee-info">
-        <summary>What&rsquo;s a gicl&eacute;e?</summary>
-        <p>A gicl&eacute;e is a fine-art print of the painting — archival inks on museum paper or canvas. Close to the original. Made to last.</p>
-      </details>
       <div class="picker-grid" id="picker-grid"></div>
       <p class="picker-chosen" id="picker-chosen">No works selected — general inquiry</p>
       <!-- Preview routing uses Azure Function st333inqfn29. -->
       <form class="contact-form picker-form" action="https://st333inqfn29.azurewebsites.net/api/inquire" method="POST">
         <div class="edition-list" id="picker-edition-list" hidden></div>
+        <details class="giclee-info picker-giclee-info">
+                <summary>What&rsquo;s a gicl&eacute;e?</summary>
+                <p>A gicl&eacute;e is a fine-art print of the painting — archival inks on museum paper or canvas. Close to the original. Made to last.</p>
+              </details>
         <div class="contact-field">
           <label class="contact-label" for="picker-name">Name</label>
           <input type="text" id="picker-name" name="name" required />
