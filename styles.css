@@ -478,32 +478,44 @@ nav a.active {
   }
 }
 
-.contact-simple {
-  grid-template-columns: 1fr;
-  max-width: 420px;
-}
 
-.contact-links {
+
+
+
+
+
+.contact-direct {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
 }
 
-.contact-email {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  text-decoration: none;
-  min-height: 44px;
+.contact-mail {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  text-decoration: none;
+  min-width: 44px;
+  min-height: 44px;
   transition: color 0.2s ease;
 }
 
-.contact-email:hover,
-.contact-email:focus {
+.contact-mail:hover,
+.contact-mail:focus {
   color: var(--accent);
+}
+
+.contact-mail-icon {
+  display: block;
+}
+
+.contact-direct .social-ig {
+  margin: 0;
+}
+
+.contact-direct .social-ig-icon {
+  width: 28px;
+  height: 28px;
 }
