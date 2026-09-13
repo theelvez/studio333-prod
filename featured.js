@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Named wall at Bis. Do not fall back to the full 33-work gallery.
   // Rasa only remaining: giclée price/size, EMAIL_TO to the artist.
   const BIS_WORKS = [
-    { title: 'Twilight Passage', src: 'assets/art-08.jpg', medium: 'Acrylic, mixed media on canvas' },
-    { title: 'Golden Veil', src: 'assets/art-07.jpg', medium: 'Acrylic, mixed media on canvas' }
+    { title: 'Twilight Passage', src: 'assets/framed/art-08.jpg', medium: 'Acrylic, mixed media on canvas' },
+    { title: 'Golden Veil', src: 'assets/framed/art-07.jpg', medium: 'Acrylic, mixed media on canvas' }
   ];
 
   const AJAX = 'https://st333inqfn29.azurewebsites.net/api/inquire';
