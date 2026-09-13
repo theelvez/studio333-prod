@@ -394,3 +394,8 @@ body.is-picker {
     gap: 24px;
   }
 }
+
+.picker-giclee-info {
+  flex: 0 0 auto;
+  margin: 0 0 8px;
+}
