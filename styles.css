@@ -239,31 +239,14 @@ nav a.active {
 .exhibition-entry {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px 64px;
+  gap: 64px;
   padding: 72px 0 64px;
   align-items: start;
 }
 
 .exhibition-meta {
-  grid-column: 1;
-  grid-row: 1;
   position: sticky;
   top: 32px;
-}
-
-.exhibition-image-block {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.exhibition-visit {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-top: 8px;
-  letter-spacing: 0.15em;
 }
 
 .exhibition-title {
@@ -281,39 +264,10 @@ nav a.active {
   margin: 0 0 16px;
 }
 
-.exhibition-inquire {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin: 8px 0 4px;
-}
-
-.giclee-info {
-  margin: 8px 0 0;
-  max-width: 28rem;
-}
-
-.giclee-info summary {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-  cursor: pointer;
-  list-style: none;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-}
-
-.giclee-info summary::-webkit-details-marker {
-  display: none;
-}
-
-.giclee-info p {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.7;
-  margin: 0 0 8px;
+.exhibition-visit {
+  display: inline-block;
+  margin-top: 28px;
+  letter-spacing: 0.15em;
 }
 
 .exhibition-img {
@@ -459,14 +413,10 @@ nav a.active {
 @media (max-width: 700px) {
   .exhibition-entry {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 40px;
     padding: 48px 0 40px;
   }
-  .exhibition-meta,
-  .exhibition-image-block,
-  .exhibition-visit {
-    grid-column: 1;
-    grid-row: auto;
+  .exhibition-meta {
     position: static;
   }
 }
@@ -510,3 +460,96 @@ nav a.active {
   }
 }
 
+.exhibition-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+.exhibition-inquire {
+  display: inline-block;
+  letter-spacing: 0.12em;
+}
+.exhibition-image-block .exhibition-visit {
+  display: inline-block;
+  margin-top: 20px;
+  letter-spacing: 0.15em;
+}
+.giclee-info {
+  max-width: 28rem;
+}
+.giclee-info-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+.giclee-info-summary::-webkit-details-marker { display: none; }
+
+.giclee-info > summary {
+  list-style: none;
+}
+.giclee-info > summary::-webkit-details-marker {
+  display: none;
+}
+.giclee-info > summary::marker {
+  content: "";
+}
+
+.giclee-info-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.giclee-info-body {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+@media (max-width: 700px) {
+  .exhibition-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 40px 0 48px;
+  }
+  .exhibition-meta {
+    position: static;
+  }
+  .exhibition-image-block {
+    display: flex;
+    flex-direction: column;
+  }
+  .exhibition-image-block .exhibition-visit {
+    order: 3;
+    margin-top: 24px;
+  }
+  .exhibition-actions { order: 1; }
+  .exhibition-img { order: 2; }
+}
+
+.giclee-info-summary {
+  min-height: 44px;
+  padding: 4px 0;
+}
+.giclee-info-summary:hover,
+.giclee-info-summary:focus-visible {
+  color: var(--text, #3a3a3a);
+  outline: 2px solid var(--accent, #1c1c1c);
+  outline-offset: 3px;
+}
