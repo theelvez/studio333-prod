@@ -223,14 +223,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(location.search);
     const worksParam = params.get('works');
     if (!worksParam) return;
-    const editionParam = (params.get('edition') || '').toLowerCase();
+    const editionParam = (params.get('edition') || 'giclee').toLowerCase();
     const wanted = worksParam.split(',').map((s) => {
       try { return decodeURIComponent(s.trim()); } catch (err) { return s.trim(); }
     }).filter(Boolean);
     const titleByLower = {};
-    works.forEach((w) => { titleByLower[w.title.toLowerCase()] = w.title; });
-    wanted.forEach((title) => {
-      const match = titleByLower[title.toLowerCase()];
+    const fileByLower = {};
+    works.forEach((w) => {
+      titleByLower[w.title.toLowerCase()] = w.title;
+      fileByLower[w.filename.toLowerCase()] = w.title;
+      fileByLower[w.filename.replace(/\.[^.]+$/, '').toLowerCase()] = w.title;
+    });
+    wanted.forEach((token) => {
+      const key = token.toLowerCase();
+      const match = titleByLower[key] || fileByLower[key];
       if (!match) return;
       selected.add(match);
       if (editionParam === 'giclee' || editionParam === 'original') {
@@ -241,6 +247,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     sync();
+    const firstOn = grid.querySelector('.picker-tile.is-on');
+    if (firstOn && typeof firstOn.scrollIntoView === 'function') {
+      firstOn.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }
   };
   applyQueryPreselect();
 
